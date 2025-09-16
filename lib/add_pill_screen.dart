@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:health_reminder/add_pill_model.dart';
+import 'package:health_reminder/pills_model.dart';
 
 class AddPillScreen extends StatefulWidget {
   const AddPillScreen({super.key});
@@ -181,16 +181,16 @@ class _AddPillScreenState extends State<AddPillScreen> {
                 ),
 
                 onPressed: () {
-                  var a = AddPillModel(
-                    pillName: pillNameController.text,
-                    description: descriptionController.text,
-                    howLong: int.parse(howLongController.text),
-                    quantity: int.parse(quantityController.text),
-                    howOften: int.parse(howOftenController.text),
-                    lastTimeEat: lastTimeEatController.text,
-                  );
+                  // var a = PillsModel(
+                  //   pillName: pillNameController.text,
+                  //   description: descriptionController.text,
+                  //   howLong: int.parse(howLongController.text),
+                  //   quantity: int.parse(quantityController.text),
+                  //   howOften: int.parse(howOftenController.text),
+                  //   lastTimeEat: lastTimeEatController.text,
+                  // );
 
-                  print("a is $a");
+                  // print("a is $a");
                 },
                 child: Text("Add"),
               ),

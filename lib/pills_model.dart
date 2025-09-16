@@ -1,10 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-part 'add_pill_model.freezed.dart';
-part 'add_pill_model.g.dart';
+part 'pills_model.freezed.dart';
+part 'pills_model.g.dart';
 
 class TimeOfDayConverter implements JsonConverter<TimeOfDay, String> {
   const TimeOfDayConverter();
@@ -21,18 +24,18 @@ class TimeOfDayConverter implements JsonConverter<TimeOfDay, String> {
 }
 
 @freezed
-abstract class AddPillModel with _$AddPillModel {
-  const factory AddPillModel({
+abstract class PillsModel with _$PillsModel {
+  const factory PillsModel({
     required String pillName,
     String? description,
     required int howLong,
     required int quantity,
     required int howOften,
-    @TimeOfDayConverter() required String lastTimeEat,
-  }) = _AddPillModel;
+    @TimeOfDayConverter() required TimeOfDay lastTimeEat,
+  }) = _PillsModel;
 
-  factory AddPillModel.fromJson(Map<String, dynamic> json) =>
-      _$AddPillModelFromJson(json);
+  factory PillsModel.fromJson(Map<String, dynamic> json) =>
+      _$PillsModelFromJson(json);
 }
 
 class DatabaseHelper {
@@ -63,7 +66,7 @@ CREATE TABLE users(
   }
 }
 
-class AddPillDatabase {
+class PillsDatabase {
   static Database? _database;
 
   Future<Database?> get database async {
@@ -98,3 +101,23 @@ class AddPillDatabase {
     );
   }
 }
+
+class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
+  @override
+  FutureOr<List<PillsModel>> build() async {
+    await Future.delayed(Duration(seconds: 1));
+    return [
+      PillsModel(
+        pillName: "pillName",
+        howLong: 1,
+        quantity: 1,
+        howOften: 1,
+        lastTimeEat: TimeOfDay(hour: 1, minute: 1),
+      ),
+    ];
+  }
+}
+
+final pillsProvider = AsyncNotifierProvider<PillsViewModel, List<PillsModel>>(
+  () => PillsViewModel(),
+);
