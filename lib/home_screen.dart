@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:health_reminder/add_pill_screen.dart';
 import 'package:health_reminder/pills_view_model.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -10,6 +11,15 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pills = ref.watch(pillsProvider);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddPillScreen()),
+          );
+        },
+      ),
       body: pills.when(
         data: (pills) {
           return ListView.builder(

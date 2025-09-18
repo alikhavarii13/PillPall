@@ -54,6 +54,7 @@ class _AddPillScreenState extends State<AddPillScreen> {
                   flex: 2,
                   child: TextField(
                     controller: howLongController,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: "for how long",
                       border: OutlineInputBorder(),
@@ -94,6 +95,7 @@ class _AddPillScreenState extends State<AddPillScreen> {
             Gap(16),
             TextField(
               controller: quantityController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: "quantity",
                 border: OutlineInputBorder(),
@@ -107,6 +109,7 @@ class _AddPillScreenState extends State<AddPillScreen> {
                   flex: 2,
                   child: TextField(
                     controller: howOftenController,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: "how often should you eat? 8 hours ",
                       border: OutlineInputBorder(),
@@ -167,14 +170,14 @@ class _AddPillScreenState extends State<AddPillScreen> {
                 border: OutlineInputBorder(),
               ),
             ),
-            Gap(16),
+            Spacer(),
             Container(
               height: 48,
               width: double.infinity,
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.black,
                   shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -192,7 +195,10 @@ class _AddPillScreenState extends State<AddPillScreen> {
 
                   // print("a is $a");
                 },
-                child: Text("Add"),
+                child: Text(
+                  "Add",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
               ),
             ),
           ],
