@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:health_reminder/pills_model.dart';
 
 class AddPillScreen extends StatefulWidget {
   const AddPillScreen({super.key});

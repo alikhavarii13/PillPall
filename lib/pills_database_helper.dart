@@ -17,8 +17,10 @@ CREATE TABLE pills(
   pillName TEXT NOT NULL,
   description TEXT,
   howLong INTEGER NOT NULL,
+  howLongUnit TEXT NOT NULL,
   quantity INTEGER NOT NULL,
   howOften INTEGER NOT NULL,
+  howOftenUnit TEXT NOT NULL,
   lastTimeEat TEXT NOT NULL
 )
 ''');
@@ -38,5 +40,10 @@ CREATE TABLE pills(
     final db = await database;
     final pills = await db.query("pills");
     return pills;
+  }
+
+  Future<int> insertPill(PillsModel model) async {
+    final db = await database;
+    return await db.insert("pills", model.toJson());
   }
 }

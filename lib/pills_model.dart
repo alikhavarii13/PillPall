@@ -24,8 +24,10 @@ abstract class PillsModel with _$PillsModel {
     required String pillName,
     String? description,
     required int howLong,
+    required String howLongUnit,
     required int quantity,
     required int howOften,
+    required String howOftenUnit,
     @TimeOfDayConverter() required TimeOfDay lastTimeEat,
   }) = _PillsModel;
 
