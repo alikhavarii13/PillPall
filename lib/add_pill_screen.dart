@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:health_reminder/pills_model.dart';
+import 'package:health_reminder/pills_view_model.dart';
 
-class AddPillScreen extends StatefulWidget {
+class AddPillScreen extends ConsumerStatefulWidget {
   const AddPillScreen({super.key});
 
   @override
-  State<AddPillScreen> createState() => _AddPillScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AddPillScreenState();
 }
 
-class _AddPillScreenState extends State<AddPillScreen> {
+class _AddPillScreenState extends ConsumerState<AddPillScreen> {
   String? howLongSelectedValue;
   String? howOftenSelectedValue;
   List<String> howLongOptions = ["Days", "Weeks", "Months"];
@@ -183,16 +186,20 @@ class _AddPillScreenState extends State<AddPillScreen> {
                 ),
 
                 onPressed: () {
-                  // var a = PillsModel(
-                  //   pillName: pillNameController.text,
-                  //   description: descriptionController.text,
-                  //   howLong: int.parse(howLongController.text),
-                  //   quantity: int.parse(quantityController.text),
-                  //   howOften: int.parse(howOftenController.text),
-                  //   lastTimeEat: lastTimeEatController.text,
-                  // );
-
-                  // print("a is $a");
+                  ref
+                      .read(pillsProvider.notifier)
+                      .addPill(
+                        PillsModel(
+                          pillName: pillNameController.text,
+                          description: descriptionController.text,
+                          howLong: int.parse(howLongController.text),
+                          howLongUnit: howLongSelectedValue!,
+                          quantity: int.parse(quantityController.text),
+                          howOften: int.parse(howOftenController.text),
+                          howOftenUnit: howOftenSelectedValue!,
+                          lastTimeEat: selectedTime,
+                        ),
+                      );
                 },
                 child: Text(
                   "Add",
