@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:health_reminder/custom_drop_down_button_widget.dart';
 import 'package:health_reminder/pills_model.dart';
 import 'package:health_reminder/pills_view_model.dart';
 
@@ -27,6 +28,7 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Add Pill")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -62,31 +64,14 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                 ),
                 Gap(8),
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        hint: Text("Select"),
-                        padding: EdgeInsets.only(left: 8),
-                        value: howLongSelectedValue,
-                        items:
-                            howLongOptions.map((item) {
-                              return DropdownMenuItem(
-                                value: item,
-                                child: Text(item),
-                              );
-                            }).toList(),
-
-                        onChanged: (item) {
-                          setState(() {
-                            howLongSelectedValue = item;
-                          });
-                        },
-                      ),
-                    ),
+                  child: CustomDropDownButton(
+                    selectedValue: howLongSelectedValue,
+                    options: howLongOptions,
+                    onChanged: (item) {
+                      setState(() {
+                        howLongSelectedValue = item;
+                      });
+                    },
                   ),
                 ),
               ],
@@ -117,31 +102,14 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                 ),
                 Gap(8),
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        hint: Text("Select"),
-                        padding: EdgeInsets.only(left: 8),
-                        value: howOftenSelectedValue,
-                        items:
-                            howOftenOptions.map((item) {
-                              return DropdownMenuItem(
-                                value: item,
-                                child: Text(item),
-                              );
-                            }).toList(),
-
-                        onChanged: (item) {
-                          setState(() {
-                            howOftenSelectedValue = item;
-                          });
-                        },
-                      ),
-                    ),
+                  child: CustomDropDownButton(
+                    selectedValue: howOftenSelectedValue,
+                    options: howOftenOptions,
+                    onChanged: (item) {
+                      setState(() {
+                        howOftenSelectedValue = item;
+                      });
+                    },
                   ),
                 ),
               ],

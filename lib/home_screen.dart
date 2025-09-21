@@ -27,6 +27,7 @@ class HomeScreen extends ConsumerWidget {
             itemCount: pills.length,
             itemBuilder: (context, index) {
               return Card(
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -84,10 +85,13 @@ class RichTextInfoWidget extends StatelessWidget {
     return RichText(
       text: TextSpan(
         children: [
-          TextSpan(text: "$label: ", style: TextStyle(fontSize: 16)),
+          TextSpan(
+            text: "$label: ",
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
           TextSpan(
             text: '$info ${period ?? ''}',
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 16, color: Colors.black),
           ),
         ],
       ),
