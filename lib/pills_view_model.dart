@@ -13,9 +13,20 @@ class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
     return pills;
   }
 
-  //TODO Read more
   Future<void> addPill(PillsModel model) async {
-    await db.insertPill(model);
+    state = AsyncLoading();
+    try {
+      await db.insertPill(model);
+      final data = await db.loadPills();
+      final updated = data.map((item) => PillsModel.fromJson(item)).toList();
+      state = AsyncData(updated);
+    } catch (e, st) {
+      state = AsyncError(e, st);
+    }
+  }
+
+  Future<void> removePill(int id) async {
+    await db.removePill(id);
     final data = await db.loadPills();
     final updated = data.map((item) => PillsModel.fromJson(item)).toList();
     state = AsyncData(updated);

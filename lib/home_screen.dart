@@ -11,6 +11,10 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pills = ref.watch(pillsProvider);
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Home", style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.black,
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -26,6 +30,7 @@ class HomeScreen extends ConsumerWidget {
             padding: EdgeInsets.all(16),
             itemCount: pills.length,
             itemBuilder: (context, index) {
+              final item = pills[index];
               return Card(
                 color: Colors.white,
                 child: Padding(
@@ -33,26 +38,23 @@ class HomeScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        pills[index].pillName,
-                        style: TextStyle(fontSize: 22),
-                      ),
+                      Text(item.pillName, style: TextStyle(fontSize: 22)),
                       Gap(16),
                       RichTextInfoWidget(
                         label: "For",
-                        info: pills[index].howLong.toString(),
+                        info: item.howLong.toString(),
                         period: "Weeks",
                       ),
                       Gap(8),
                       RichTextInfoWidget(
                         label: "Every",
-                        info: pills[index].howOften.toString(),
+                        info: item.howOften.toString(),
                         period: "Hours",
                       ),
                       Gap(8),
                       RichTextInfoWidget(
                         label: "Last Taken",
-                        info: pills[index].lastTimeEat.format(context),
+                        info: item.lastTimeEat.format(context),
                       ),
                     ],
                   ),

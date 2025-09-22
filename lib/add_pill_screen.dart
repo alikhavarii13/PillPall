@@ -27,6 +27,7 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
   final lastTimeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final pillsState = ref.watch(pillsProvider);
     return Scaffold(
       appBar: AppBar(title: Text("Add Pill")),
       body: Padding(
@@ -166,10 +167,13 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                         ),
                       );
                 },
-                child: Text(
-                  "Add",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
+                child:
+                    pillsState.isLoading
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text(
+                          "Add",
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
               ),
             ),
           ],

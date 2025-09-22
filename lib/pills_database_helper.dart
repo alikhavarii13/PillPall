@@ -46,4 +46,9 @@ CREATE TABLE pills(
     final db = await database;
     return await db.insert("pills", model.toJson());
   }
+
+  Future<int> removePill(int id) async {
+    final db = await database;
+    return await db.delete("pills", where: "id = ?", whereArgs: [id]);
+  }
 }

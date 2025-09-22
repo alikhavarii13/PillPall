@@ -21,6 +21,7 @@ class TimeOfDayConverter implements JsonConverter<TimeOfDay, String> {
 @freezed
 abstract class PillsModel with _$PillsModel {
   const factory PillsModel({
+    int? id,
     required String pillName,
     String? description,
     required int howLong,
