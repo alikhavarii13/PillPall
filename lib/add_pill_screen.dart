@@ -152,20 +152,28 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                 ),
 
                 onPressed: () {
-                  ref
-                      .read(pillsProvider.notifier)
-                      .addPill(
-                        PillsModel(
-                          pillName: pillNameController.text,
-                          description: descriptionController.text,
-                          howLong: int.parse(howLongController.text),
-                          howLongUnit: howLongSelectedValue!,
-                          quantity: int.parse(quantityController.text),
-                          howOften: int.parse(howOftenController.text),
-                          howOftenUnit: howOftenSelectedValue!,
-                          lastTimeEat: selectedTime,
-                        ),
-                      );
+                  try {
+                    ref
+                        .read(pillsProvider.notifier)
+                        .addPill(
+                          PillsModel(
+                            pillName: pillNameController.text,
+                            description: descriptionController.text,
+                            howLong: int.parse(howLongController.text),
+                            howLongUnit: howLongSelectedValue!,
+                            quantity: int.parse(quantityController.text),
+                            howOften: int.parse(howOftenController.text),
+                            howOftenUnit: howOftenSelectedValue!,
+                            lastTimeEat: selectedTime,
+                          ),
+                        );
+                    if (!mounted) return;
+                    Navigator.pop(context);
+                  } catch (e) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(" $e")));
+                  }
                 },
                 child:
                     pillsState.isLoading
