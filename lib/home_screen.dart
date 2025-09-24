@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:health_reminder/add_pill_screen.dart';
 import 'package:health_reminder/pills_view_model.dart';
@@ -31,32 +32,51 @@ class HomeScreen extends ConsumerWidget {
             itemCount: pills.length,
             itemBuilder: (context, index) {
               final item = pills[index];
-              return Card(
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(item.pillName, style: TextStyle(fontSize: 22)),
-                      Gap(16),
-                      RichTextInfoWidget(
-                        label: "For",
-                        info: item.howLong.toString(),
-                        period: "Weeks",
+              return Slidable(
+                startActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (BuildContext context) {
+                        ref.read(pillsProvider.notifier).removePill(item.id!);
+                      },
+                      backgroundColor: Color(0xFFFE4A49),
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete,
+                      label: 'Delete',
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Card(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(item.pillName, style: TextStyle(fontSize: 22)),
+                          Gap(16),
+                          RichTextInfoWidget(
+                            label: "For",
+                            info: item.howLong.toString(),
+                            period: "Weeks",
+                          ),
+                          Gap(8),
+                          RichTextInfoWidget(
+                            label: "Every",
+                            info: item.howOften.toString(),
+                            period: "Hours",
+                          ),
+                          Gap(8),
+                          RichTextInfoWidget(
+                            label: "Last Taken",
+                            info: item.lastTimeEat.format(context),
+                          ),
+                        ],
                       ),
-                      Gap(8),
-                      RichTextInfoWidget(
-                        label: "Every",
-                        info: item.howOften.toString(),
-                        period: "Hours",
-                      ),
-                      Gap(8),
-                      RichTextInfoWidget(
-                        label: "Last Taken",
-                        info: item.lastTimeEat.format(context),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               );

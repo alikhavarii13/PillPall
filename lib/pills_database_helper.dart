@@ -51,4 +51,6 @@ CREATE TABLE pills(
     final db = await database;
     return await db.delete("pills", where: "id = ?", whereArgs: [id]);
   }
+
+  //TODO add edit for pills
 }
