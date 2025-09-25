@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:health_reminder/custom_drop_down_button_widget.dart';
-import 'package:health_reminder/pills_model.dart';
-import 'package:health_reminder/pills_view_model.dart';
+import 'package:health_reminder/home/data/pills_model.dart';
+import 'package:health_reminder/home/view/widget/custom_drop_down_button_widget.dart';
+import 'package:health_reminder/home/view_model/pills_view_model.dart';
 
 class AddPillScreen extends ConsumerStatefulWidget {
   const AddPillScreen({super.key});

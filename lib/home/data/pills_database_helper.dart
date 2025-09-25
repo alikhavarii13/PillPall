@@ -1,4 +1,4 @@
-import 'package:health_reminder/pills_model.dart';
+import 'package:health_reminder/home/data/pills_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -52,5 +52,13 @@ CREATE TABLE pills(
     return await db.delete("pills", where: "id = ?", whereArgs: [id]);
   }
 
-  //TODO add edit for pills
+  Future<int> updatePill(PillsModel model) async {
+    final db = await database;
+    return await db.update(
+      "pills",
+      model.toJson(),
+      where: "id = ?",
+      whereArgs: [model.id],
+    );
+  }
 }

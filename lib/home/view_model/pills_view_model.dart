@@ -31,6 +31,16 @@ class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
     final updated = data.map((item) => PillsModel.fromJson(item)).toList();
     state = AsyncData(updated);
   }
+
+  Future<void> editPill(PillsModel model) async {
+    state = AsyncLoading();
+
+    state = await AsyncValue.guard(() async {
+      await db.updatePill(model);
+      final data = await db.loadPills();
+      return data.map((e) => PillsModel.fromJson(e)).toList();
+    });
+  }
 }
 
 final pillsProvider = AsyncNotifierProvider<PillsViewModel, List<PillsModel>>(
