@@ -33,9 +33,10 @@ class HomeScreen extends ConsumerWidget {
               final item = pills[index];
               return HomeCardItemsWidget(
                 item: item,
-                onPressed: (BuildContext context) {
+                deleteOnPressed: (context) {
                   ref.read(pillsProvider.notifier).removePill(item.id!);
                 },
+                editOnPressed: (context) {},
               );
             },
           );

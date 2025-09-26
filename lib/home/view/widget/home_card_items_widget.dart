@@ -8,11 +8,13 @@ class HomeCardItemsWidget extends StatelessWidget {
   const HomeCardItemsWidget({
     super.key,
     required this.item,
-    required this.onPressed,
+    required this.deleteOnPressed,
+    required this.editOnPressed,
   });
 
   final PillsModel item;
-  final void Function(BuildContext)? onPressed;
+  final void Function(BuildContext)? deleteOnPressed;
+  final void Function(BuildContext)? editOnPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,47 @@ class HomeCardItemsWidget extends StatelessWidget {
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
-            onPressed: onPressed,
-            backgroundColor: Color(0xFFFE4A49),
+            onPressed: (context) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Confirmation"),
+                    content: const Text(
+                      'Are you sure you want to delete this item? This action cannot be undone.',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Cancel"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          if (deleteOnPressed != null) {
+                            deleteOnPressed!(context);
+                          }
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Delete"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            backgroundColor: Colors.redAccent,
             foregroundColor: Colors.white,
             icon: Icons.delete,
             label: 'Delete',
+          ),
+          SlidableAction(
+            onPressed: editOnPressed,
+            backgroundColor: Colors.grey,
+            foregroundColor: Colors.white,
+            icon: Icons.edit,
+            label: 'Edit',
           ),
         ],
       ),
