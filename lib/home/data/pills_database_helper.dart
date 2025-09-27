@@ -18,7 +18,6 @@ CREATE TABLE pills(
   description TEXT,
   howLong INTEGER NOT NULL,
   howLongUnit TEXT NOT NULL,
-  quantity INTEGER NOT NULL,
   howOften INTEGER NOT NULL,
   howOftenUnit TEXT NOT NULL,
   lastTimeEat TEXT NOT NULL

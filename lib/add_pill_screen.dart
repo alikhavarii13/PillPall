@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:health_reminder/generate_description_api.dart';
 import 'package:health_reminder/home/data/pills_model.dart';
 import 'package:health_reminder/home/view/widget/custom_drop_down_button_widget.dart';
 import 'package:health_reminder/home/view_model/pills_view_model.dart';
@@ -22,13 +23,13 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
   final pillNameController = TextEditingController();
   final descriptionController = TextEditingController();
   final howLongController = TextEditingController();
-  final quantityController = TextEditingController();
   final howOftenController = TextEditingController();
   final lastTimeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final pillsState = ref.watch(pillsProvider);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text("Add Pill")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -77,15 +78,7 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                 ),
               ],
             ),
-            Gap(16),
-            TextField(
-              controller: quantityController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: "quantity",
-                border: OutlineInputBorder(),
-              ),
-            ),
+
             Gap(16),
 
             Row(
@@ -152,28 +145,29 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                 ),
 
                 onPressed: () {
-                  try {
-                    ref
-                        .read(pillsProvider.notifier)
-                        .addPill(
-                          PillsModel(
-                            pillName: pillNameController.text,
-                            description: descriptionController.text,
-                            howLong: int.parse(howLongController.text),
-                            howLongUnit: howLongSelectedValue!,
-                            quantity: int.parse(quantityController.text),
-                            howOften: int.parse(howOftenController.text),
-                            howOftenUnit: howOftenSelectedValue!,
-                            lastTimeEat: selectedTime,
-                          ),
-                        );
-                    if (!mounted) return;
-                    Navigator.pop(context);
-                  } catch (e) {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text(" $e")));
-                  }
+                  final calling = GenerateDescriptionApi();
+                  calling.generate(pillNameController.text);
+                  // try {
+                  //   ref
+                  //       .read(pillsProvider.notifier)
+                  //       .addPill(
+                  //         PillsModel(
+                  //           pillName: pillNameController.text,
+                  //           description: descriptionController.text,
+                  //           howLong: int.parse(howLongController.text),
+                  //           howLongUnit: howLongSelectedValue!,
+                  //           howOften: int.parse(howOftenController.text),
+                  //           howOftenUnit: howOftenSelectedValue!,
+                  //           lastTimeEat: selectedTime,
+                  //         ),
+                  //       );
+                  //   if (!mounted) return;
+                  //   Navigator.pop(context);
+                  // } catch (e) {
+                  //   ScaffoldMessenger.of(
+                  //     context,
+                  //   ).showSnackBar(SnackBar(content: Text(" $e")));
+                  // }
                 },
                 child:
                     pillsState.isLoading
