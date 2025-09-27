@@ -10,8 +10,7 @@ class GenerateDescriptionApi {
         options: Options(
           headers: {
             "Content-Type": "application/json",
-            "Authorization":
-                "Bearer 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", // put your key here
+            "Authorization": "Bearer ",
           },
         ),
         data: {
