@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:health_reminder/generate_description_api.dart';
 import 'package:health_reminder/home/data/pills_model.dart';
 import 'package:health_reminder/home/view/widget/custom_drop_down_button_widget.dart';
 import 'package:health_reminder/home/view_model/pills_view_model.dart';
 
 class AddPillScreen extends ConsumerStatefulWidget {
-  const AddPillScreen({super.key});
-
+  const AddPillScreen({super.key, this.pillId});
+  final int? pillId;
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _AddPillScreenState();
 }
@@ -25,6 +24,12 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
   final howLongController = TextEditingController();
   final howOftenController = TextEditingController();
   final lastTimeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final pillsState = ref.watch(pillsProvider);
@@ -145,29 +150,27 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                 ),
 
                 onPressed: () {
-                  final calling = GenerateDescriptionApi();
-                  calling.generate(pillNameController.text);
-                  // try {
-                  //   ref
-                  //       .read(pillsProvider.notifier)
-                  //       .addPill(
-                  //         PillsModel(
-                  //           pillName: pillNameController.text,
-                  //           description: descriptionController.text,
-                  //           howLong: int.parse(howLongController.text),
-                  //           howLongUnit: howLongSelectedValue!,
-                  //           howOften: int.parse(howOftenController.text),
-                  //           howOftenUnit: howOftenSelectedValue!,
-                  //           lastTimeEat: selectedTime,
-                  //         ),
-                  //       );
-                  //   if (!mounted) return;
-                  //   Navigator.pop(context);
-                  // } catch (e) {
-                  //   ScaffoldMessenger.of(
-                  //     context,
-                  //   ).showSnackBar(SnackBar(content: Text(" $e")));
-                  // }
+                  try {
+                    ref
+                        .read(pillsProvider.notifier)
+                        .addPill(
+                          PillsModel(
+                            pillName: pillNameController.text,
+                            description: descriptionController.text,
+                            howLong: int.parse(howLongController.text),
+                            howLongUnit: howLongSelectedValue!,
+                            howOften: int.parse(howOftenController.text),
+                            howOftenUnit: howOftenSelectedValue!,
+                            lastTimeEat: selectedTime,
+                          ),
+                        );
+                    if (!mounted) return;
+                    Navigator.pop(context);
+                  } catch (e) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(" $e")));
+                  }
                 },
                 child:
                     pillsState.isLoading

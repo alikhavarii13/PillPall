@@ -36,7 +36,13 @@ class HomeScreen extends ConsumerWidget {
                 deleteOnPressed: (context) {
                   ref.read(pillsProvider.notifier).removePill(item.id!);
                 },
-                editOnPressed: (context) {},
+                editOnPressed: (context) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AddPillScreen(pillId: item.id!),
+                    ),
+                  );
+                },
               );
             },
           );
