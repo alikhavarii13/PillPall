@@ -4,7 +4,7 @@ import 'package:health_reminder/home/data/pills_database_helper.dart';
 import 'package:health_reminder/home/data/pills_model.dart';
 
 class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
-  final db = PillsDatabaseHelper();
+  final db = PillsDatabaseHelper.instance;
   @override
   Future<List<PillsModel>> build() async {
     await Future.delayed(Duration(seconds: 1));

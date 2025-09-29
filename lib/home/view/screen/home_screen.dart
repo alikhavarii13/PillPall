@@ -48,7 +48,13 @@ class HomeScreen extends ConsumerWidget {
           );
         },
         error: (err, stack) {
-          return Text(err.toString());
+          return Center(
+            child: Text(
+              'Something went wrong. Please try again later.',
+              style: TextStyle(color: Colors.red, fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+          );
         },
         loading: () => Center(child: CircularProgressIndicator()),
       ),

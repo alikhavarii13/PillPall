@@ -24,10 +24,22 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
   final howLongController = TextEditingController();
   final howOftenController = TextEditingController();
   final lastTimeController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    lastTimeEatController.dispose();
+    pillNameController.dispose();
+    descriptionController.dispose();
+    howLongController.dispose();
+    howOftenController.dispose();
+    lastTimeController.dispose();
+    super.dispose();
   }
 
   @override
@@ -36,152 +48,164 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text("Add Pill")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: pillNameController,
-              decoration: InputDecoration(
-                labelText: "Pill Name",
-                border: OutlineInputBorder(),
+      body: Form(
+        key: formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a name';
+                  }
+                  return null;
+                },
+                controller: pillNameController,
+                decoration: InputDecoration(
+                  labelText: "Pill Name",
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            Gap(16),
-            TextField(
-              controller: descriptionController,
-              decoration: InputDecoration(
-                labelText: "Description",
-                border: OutlineInputBorder(),
+              Gap(16),
+              TextFormField(
+                controller: descriptionController,
+                decoration: InputDecoration(
+                  labelText: "Description",
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            Gap(16),
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: TextField(
-                    controller: howLongController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: "for how long",
-                      border: OutlineInputBorder(),
+              Gap(16),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(
+                      controller: howLongController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: "for how long",
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                   ),
-                ),
-                Gap(8),
-                Expanded(
-                  child: CustomDropDownButton(
-                    selectedValue: howLongSelectedValue,
-                    options: howLongOptions,
-                    onChanged: (item) {
-                      setState(() {
-                        howLongSelectedValue = item;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-
-            Gap(16),
-
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: TextField(
-                    controller: howOftenController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: "how often should you eat? 8 hours ",
-                      border: OutlineInputBorder(),
+                  Gap(8),
+                  Expanded(
+                    child: CustomDropDownButton(
+                      selectedValue: howLongSelectedValue,
+                      options: howLongOptions,
+                      onChanged: (item) {
+                        setState(() {
+                          howLongSelectedValue = item;
+                        });
+                      },
                     ),
                   ),
-                ),
-                Gap(8),
-                Expanded(
-                  child: CustomDropDownButton(
-                    selectedValue: howOftenSelectedValue,
-                    options: howOftenOptions,
-                    onChanged: (item) {
-                      setState(() {
-                        howOftenSelectedValue = item;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            Gap(16),
-            TextField(
-              controller: lastTimeEatController,
-              readOnly: true,
-              onTap: () async {
-                FocusScope.of(context).requestFocus(FocusNode());
-                final picked = await showTimePicker(
-                  context: context,
-                  initialTime: selectedTime,
-                );
-                if (picked != null) {
-                  setState(() {
-                    selectedTime = picked;
-                    lastTimeEatController.text = selectedTime.format(context);
-                  });
-                }
-              },
-
-              decoration: InputDecoration(
-                labelText: "when was the last time that you ate your pill?",
-                border: OutlineInputBorder(),
+                ],
               ),
-            ),
-            Spacer(),
-            Container(
-              height: 48,
-              width: double.infinity,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  shape: ContinuousRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+              Gap(16),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(
+                      controller: howOftenController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText:
+                            "How often should you take your pill (e.g., every 8)",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
                   ),
-                ),
-
-                onPressed: () {
-                  try {
-                    ref
-                        .read(pillsProvider.notifier)
-                        .addPill(
-                          PillsModel(
-                            pillName: pillNameController.text,
-                            description: descriptionController.text,
-                            howLong: int.parse(howLongController.text),
-                            howLongUnit: howLongSelectedValue!,
-                            howOften: int.parse(howOftenController.text),
-                            howOftenUnit: howOftenSelectedValue!,
-                            lastTimeEat: selectedTime,
-                          ),
-                        );
-                    if (!mounted) return;
-                    Navigator.pop(context);
-                  } catch (e) {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text(" $e")));
+                  Gap(8),
+                  Expanded(
+                    child: CustomDropDownButton(
+                      selectedValue: howOftenSelectedValue,
+                      options: howOftenOptions,
+                      onChanged: (item) {
+                        setState(() {
+                          howOftenSelectedValue = item;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Gap(16),
+              TextFormField(
+                controller: lastTimeEatController,
+                readOnly: true,
+                onTap: () async {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  final picked = await showTimePicker(
+                    context: context,
+                    initialTime: selectedTime,
+                  );
+                  if (picked != null) {
+                    setState(() {
+                      selectedTime = picked;
+                      lastTimeEatController.text = selectedTime.format(context);
+                    });
                   }
                 },
-                child:
-                    pillsState.isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
-                          "Add",
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                        ),
+
+                decoration: InputDecoration(
+                  labelText: "Last time you took your pill",
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-          ],
+              const Spacer(),
+              Container(
+                height: 48,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    shape: ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+
+                  onPressed: () {
+                    try {
+                      if (!mounted) return;
+                      if (formKey.currentState!.validate()) {
+                        ref
+                            .read(pillsProvider.notifier)
+                            .addPill(
+                              PillsModel(
+                                pillName: pillNameController.text,
+                                description: descriptionController.text,
+                                howLong: int.parse(howLongController.text),
+                                howLongUnit: howLongSelectedValue!,
+                                howOften: int.parse(howOftenController.text),
+                                howOftenUnit: howOftenSelectedValue!,
+                                lastTimeEat: selectedTime,
+                              ),
+                            );
+                        Navigator.pop(context);
+                      }
+                    } catch (e) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text("$e")));
+                    }
+                  },
+                  child:
+                      pillsState.isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text(
+                            "Add",
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
