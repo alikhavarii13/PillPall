@@ -24,6 +24,8 @@ abstract class PillsModel with _$PillsModel {
     int? id,
     required String pillName,
     String? description,
+    required int isActive,
+    int? count,
     required int howLong,
     required String howLongUnit,
     required int howOften,

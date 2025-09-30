@@ -24,7 +24,9 @@ CREATE TABLE pills(
   howLongUnit TEXT NOT NULL,
   howOften INTEGER NOT NULL,
   howOftenUnit TEXT NOT NULL,
-  lastTimeEat TEXT NOT NULL
+  lastTimeEat TEXT NOT NULL,
+  isActive INTEGER,
+  count INTEGER
 )
 ''');
   }
@@ -64,4 +66,19 @@ CREATE TABLE pills(
       whereArgs: [model.id],
     );
   }
+
+  Future<List<Map<String, Object?>>> countPills(
+    DateTime date,
+    int howOften,
+  ) async {
+    final db = await database;
+    return await db.rawQuery("UPDATE pills SET count = (24 / howOften ) * 30");
+  }
 }
+
+
+/// switch howLongUnit {
+/// case "week" value * 7
+/// case month  value * 30
+/// case day    value * 1
+/// }

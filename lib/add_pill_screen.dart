@@ -185,6 +185,7 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                                 howOften: int.parse(howOftenController.text),
                                 howOftenUnit: howOftenSelectedValue!,
                                 lastTimeEat: selectedTime,
+                                isActive: 1,
                               ),
                             );
                         Navigator.pop(context);
