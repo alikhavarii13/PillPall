@@ -33,6 +33,19 @@ abstract class PillsModel with _$PillsModel {
     @TimeOfDayConverter() required TimeOfDay lastTimeEat,
   }) = _PillsModel;
 
+  // extension Calculation on PillsModel{
+  //   int get count {
+  //     switch (howOftenUnit) {
+  //       case "Hours":
+  //         (24/howOften).round();
+  //       case "Days":
+  //         (24/howOften).round();
+
+  //         break;
+  //       default:
+  //     }
+  //   }
+  // }
   factory PillsModel.fromJson(Map<String, dynamic> json) =>
       _$PillsModelFromJson(json);
 }
