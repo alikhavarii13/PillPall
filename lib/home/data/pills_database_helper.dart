@@ -25,8 +25,7 @@ CREATE TABLE pills(
   howOften INTEGER NOT NULL,
   howOftenUnit TEXT NOT NULL,
   lastTimeEat TEXT NOT NULL,
-  isActive INTEGER,
-  count INTEGER
+  isActive INTEGER
 )
 ''');
   }

@@ -83,18 +83,13 @@ class HomeCardItemsWidget extends StatelessWidget {
                   info: item.howLong.toString(),
                   period: "Weeks",
                 ),
-                Gap(16),
-                RichTextInfoWidget(
-                  label: "Count",
-                  info:
-                      ((24 / item.howOften).round() * (item.howLong * 30))
-                          .toString(),
-                ),
+                Gap(8),
+                RichTextInfoWidget(label: "Count", info: item.count.toString()),
                 Gap(8),
                 RichTextInfoWidget(
                   label: "Every",
                   info: item.howOften.toString(),
-                  period: "Hours",
+                  period: item.howOftenUnit,
                 ),
                 Gap(8),
                 RichTextInfoWidget(

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PillsModel {
 
- int? get id; String get pillName; String? get description; int get isActive; int? get count; int get howLong; String get howLongUnit; int get howOften; String get howOftenUnit;@TimeOfDayConverter() TimeOfDay get lastTimeEat;
+ int? get id; String get pillName; String? get description; int get isActive; int get howLong; String get howLongUnit; int get howOften; String get howOftenUnit;@TimeOfDayConverter() TimeOfDay get lastTimeEat;
 /// Create a copy of PillsModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $PillsModelCopyWith<PillsModel> get copyWith => _$PillsModelCopyWithImpl<PillsMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PillsModel&&(identical(other.id, id) || other.id == id)&&(identical(other.pillName, pillName) || other.pillName == pillName)&&(identical(other.description, description) || other.description == description)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.count, count) || other.count == count)&&(identical(other.howLong, howLong) || other.howLong == howLong)&&(identical(other.howLongUnit, howLongUnit) || other.howLongUnit == howLongUnit)&&(identical(other.howOften, howOften) || other.howOften == howOften)&&(identical(other.howOftenUnit, howOftenUnit) || other.howOftenUnit == howOftenUnit)&&(identical(other.lastTimeEat, lastTimeEat) || other.lastTimeEat == lastTimeEat));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PillsModel&&(identical(other.id, id) || other.id == id)&&(identical(other.pillName, pillName) || other.pillName == pillName)&&(identical(other.description, description) || other.description == description)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.howLong, howLong) || other.howLong == howLong)&&(identical(other.howLongUnit, howLongUnit) || other.howLongUnit == howLongUnit)&&(identical(other.howOften, howOften) || other.howOften == howOften)&&(identical(other.howOftenUnit, howOftenUnit) || other.howOftenUnit == howOftenUnit)&&(identical(other.lastTimeEat, lastTimeEat) || other.lastTimeEat == lastTimeEat));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,pillName,description,isActive,count,howLong,howLongUnit,howOften,howOftenUnit,lastTimeEat);
+int get hashCode => Object.hash(runtimeType,id,pillName,description,isActive,howLong,howLongUnit,howOften,howOftenUnit,lastTimeEat);
 
 @override
 String toString() {
-  return 'PillsModel(id: $id, pillName: $pillName, description: $description, isActive: $isActive, count: $count, howLong: $howLong, howLongUnit: $howLongUnit, howOften: $howOften, howOftenUnit: $howOftenUnit, lastTimeEat: $lastTimeEat)';
+  return 'PillsModel(id: $id, pillName: $pillName, description: $description, isActive: $isActive, howLong: $howLong, howLongUnit: $howLongUnit, howOften: $howOften, howOftenUnit: $howOftenUnit, lastTimeEat: $lastTimeEat)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $PillsModelCopyWith<$Res>  {
   factory $PillsModelCopyWith(PillsModel value, $Res Function(PillsModel) _then) = _$PillsModelCopyWithImpl;
 @useResult
 $Res call({
- int? id, String pillName, String? description, int isActive, int? count, int howLong, String howLongUnit, int howOften, String howOftenUnit,@TimeOfDayConverter() TimeOfDay lastTimeEat
+ int? id, String pillName, String? description, int isActive, int howLong, String howLongUnit, int howOften, String howOftenUnit,@TimeOfDayConverter() TimeOfDay lastTimeEat
 });
 
 
@@ -65,14 +65,13 @@ class _$PillsModelCopyWithImpl<$Res>
 
 /// Create a copy of PillsModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? pillName = null,Object? description = freezed,Object? isActive = null,Object? count = freezed,Object? howLong = null,Object? howLongUnit = null,Object? howOften = null,Object? howOftenUnit = null,Object? lastTimeEat = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? pillName = null,Object? description = freezed,Object? isActive = null,Object? howLong = null,Object? howLongUnit = null,Object? howOften = null,Object? howOftenUnit = null,Object? lastTimeEat = null,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,pillName: null == pillName ? _self.pillName : pillName // ignore: cast_nullable_to_non_nullable
 as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
-as int,count: freezed == count ? _self.count : count // ignore: cast_nullable_to_non_nullable
-as int?,howLong: null == howLong ? _self.howLong : howLong // ignore: cast_nullable_to_non_nullable
+as int,howLong: null == howLong ? _self.howLong : howLong // ignore: cast_nullable_to_non_nullable
 as int,howLongUnit: null == howLongUnit ? _self.howLongUnit : howLongUnit // ignore: cast_nullable_to_non_nullable
 as String,howOften: null == howOften ? _self.howOften : howOften // ignore: cast_nullable_to_non_nullable
 as int,howOftenUnit: null == howOftenUnit ? _self.howOftenUnit : howOftenUnit // ignore: cast_nullable_to_non_nullable
@@ -162,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String pillName,  String? description,  int isActive,  int? count,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @TimeOfDayConverter()  TimeOfDay lastTimeEat)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String pillName,  String? description,  int isActive,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @TimeOfDayConverter()  TimeOfDay lastTimeEat)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PillsModel() when $default != null:
-return $default(_that.id,_that.pillName,_that.description,_that.isActive,_that.count,_that.howLong,_that.howLongUnit,_that.howOften,_that.howOftenUnit,_that.lastTimeEat);case _:
+return $default(_that.id,_that.pillName,_that.description,_that.isActive,_that.howLong,_that.howLongUnit,_that.howOften,_that.howOftenUnit,_that.lastTimeEat);case _:
   return orElse();
 
 }
@@ -183,10 +182,10 @@ return $default(_that.id,_that.pillName,_that.description,_that.isActive,_that.c
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String pillName,  String? description,  int isActive,  int? count,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @TimeOfDayConverter()  TimeOfDay lastTimeEat)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String pillName,  String? description,  int isActive,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @TimeOfDayConverter()  TimeOfDay lastTimeEat)  $default,) {final _that = this;
 switch (_that) {
 case _PillsModel():
-return $default(_that.id,_that.pillName,_that.description,_that.isActive,_that.count,_that.howLong,_that.howLongUnit,_that.howOften,_that.howOftenUnit,_that.lastTimeEat);case _:
+return $default(_that.id,_that.pillName,_that.description,_that.isActive,_that.howLong,_that.howLongUnit,_that.howOften,_that.howOftenUnit,_that.lastTimeEat);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +202,10 @@ return $default(_that.id,_that.pillName,_that.description,_that.isActive,_that.c
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String pillName,  String? description,  int isActive,  int? count,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @TimeOfDayConverter()  TimeOfDay lastTimeEat)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String pillName,  String? description,  int isActive,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @TimeOfDayConverter()  TimeOfDay lastTimeEat)?  $default,) {final _that = this;
 switch (_that) {
 case _PillsModel() when $default != null:
-return $default(_that.id,_that.pillName,_that.description,_that.isActive,_that.count,_that.howLong,_that.howLongUnit,_that.howOften,_that.howOftenUnit,_that.lastTimeEat);case _:
+return $default(_that.id,_that.pillName,_that.description,_that.isActive,_that.howLong,_that.howLongUnit,_that.howOften,_that.howOftenUnit,_that.lastTimeEat);case _:
   return null;
 
 }
@@ -218,14 +217,13 @@ return $default(_that.id,_that.pillName,_that.description,_that.isActive,_that.c
 @JsonSerializable()
 
 class _PillsModel implements PillsModel {
-  const _PillsModel({this.id, required this.pillName, this.description, required this.isActive, this.count, required this.howLong, required this.howLongUnit, required this.howOften, required this.howOftenUnit, @TimeOfDayConverter() required this.lastTimeEat});
+  const _PillsModel({this.id, required this.pillName, this.description, required this.isActive, required this.howLong, required this.howLongUnit, required this.howOften, required this.howOftenUnit, @TimeOfDayConverter() required this.lastTimeEat});
   factory _PillsModel.fromJson(Map<String, dynamic> json) => _$PillsModelFromJson(json);
 
 @override final  int? id;
 @override final  String pillName;
 @override final  String? description;
 @override final  int isActive;
-@override final  int? count;
 @override final  int howLong;
 @override final  String howLongUnit;
 @override final  int howOften;
@@ -245,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PillsModel&&(identical(other.id, id) || other.id == id)&&(identical(other.pillName, pillName) || other.pillName == pillName)&&(identical(other.description, description) || other.description == description)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.count, count) || other.count == count)&&(identical(other.howLong, howLong) || other.howLong == howLong)&&(identical(other.howLongUnit, howLongUnit) || other.howLongUnit == howLongUnit)&&(identical(other.howOften, howOften) || other.howOften == howOften)&&(identical(other.howOftenUnit, howOftenUnit) || other.howOftenUnit == howOftenUnit)&&(identical(other.lastTimeEat, lastTimeEat) || other.lastTimeEat == lastTimeEat));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PillsModel&&(identical(other.id, id) || other.id == id)&&(identical(other.pillName, pillName) || other.pillName == pillName)&&(identical(other.description, description) || other.description == description)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.howLong, howLong) || other.howLong == howLong)&&(identical(other.howLongUnit, howLongUnit) || other.howLongUnit == howLongUnit)&&(identical(other.howOften, howOften) || other.howOften == howOften)&&(identical(other.howOftenUnit, howOftenUnit) || other.howOftenUnit == howOftenUnit)&&(identical(other.lastTimeEat, lastTimeEat) || other.lastTimeEat == lastTimeEat));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,pillName,description,isActive,count,howLong,howLongUnit,howOften,howOftenUnit,lastTimeEat);
+int get hashCode => Object.hash(runtimeType,id,pillName,description,isActive,howLong,howLongUnit,howOften,howOftenUnit,lastTimeEat);
 
 @override
 String toString() {
-  return 'PillsModel(id: $id, pillName: $pillName, description: $description, isActive: $isActive, count: $count, howLong: $howLong, howLongUnit: $howLongUnit, howOften: $howOften, howOftenUnit: $howOftenUnit, lastTimeEat: $lastTimeEat)';
+  return 'PillsModel(id: $id, pillName: $pillName, description: $description, isActive: $isActive, howLong: $howLong, howLongUnit: $howLongUnit, howOften: $howOften, howOftenUnit: $howOftenUnit, lastTimeEat: $lastTimeEat)';
 }
 
 
@@ -265,7 +263,7 @@ abstract mixin class _$PillsModelCopyWith<$Res> implements $PillsModelCopyWith<$
   factory _$PillsModelCopyWith(_PillsModel value, $Res Function(_PillsModel) _then) = __$PillsModelCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String pillName, String? description, int isActive, int? count, int howLong, String howLongUnit, int howOften, String howOftenUnit,@TimeOfDayConverter() TimeOfDay lastTimeEat
+ int? id, String pillName, String? description, int isActive, int howLong, String howLongUnit, int howOften, String howOftenUnit,@TimeOfDayConverter() TimeOfDay lastTimeEat
 });
 
 
@@ -282,14 +280,13 @@ class __$PillsModelCopyWithImpl<$Res>
 
 /// Create a copy of PillsModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? pillName = null,Object? description = freezed,Object? isActive = null,Object? count = freezed,Object? howLong = null,Object? howLongUnit = null,Object? howOften = null,Object? howOftenUnit = null,Object? lastTimeEat = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? pillName = null,Object? description = freezed,Object? isActive = null,Object? howLong = null,Object? howLongUnit = null,Object? howOften = null,Object? howOftenUnit = null,Object? lastTimeEat = null,}) {
   return _then(_PillsModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,pillName: null == pillName ? _self.pillName : pillName // ignore: cast_nullable_to_non_nullable
 as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
-as int,count: freezed == count ? _self.count : count // ignore: cast_nullable_to_non_nullable
-as int?,howLong: null == howLong ? _self.howLong : howLong // ignore: cast_nullable_to_non_nullable
+as int,howLong: null == howLong ? _self.howLong : howLong // ignore: cast_nullable_to_non_nullable
 as int,howLongUnit: null == howLongUnit ? _self.howLongUnit : howLongUnit // ignore: cast_nullable_to_non_nullable
 as String,howOften: null == howOften ? _self.howOften : howOften // ignore: cast_nullable_to_non_nullable
 as int,howOftenUnit: null == howOftenUnit ? _self.howOftenUnit : howOftenUnit // ignore: cast_nullable_to_non_nullable

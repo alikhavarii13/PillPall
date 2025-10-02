@@ -25,7 +25,6 @@ abstract class PillsModel with _$PillsModel {
     required String pillName,
     String? description,
     required int isActive,
-    int? count,
     required int howLong,
     required String howLongUnit,
     required int howOften,
@@ -33,19 +32,33 @@ abstract class PillsModel with _$PillsModel {
     @TimeOfDayConverter() required TimeOfDay lastTimeEat,
   }) = _PillsModel;
 
-  // extension Calculation on PillsModel{
-  //   int get count {
-  //     switch (howOftenUnit) {
-  //       case "Hours":
-  //         (24/howOften).round();
-  //       case "Days":
-  //         (24/howOften).round();
-
-  //         break;
-  //       default:
-  //     }
-  //   }
-  // }
   factory PillsModel.fromJson(Map<String, dynamic> json) =>
       _$PillsModelFromJson(json);
+}
+
+extension CountCalculation on PillsModel {
+  int get count {
+    switch (howOftenUnit) {
+      case "Hours":
+        return (24 / howOften).floor() * howLongConvertedToDays;
+      case "Days":
+        return (howLongConvertedToDays / howOften).floor();
+
+      default:
+        return 0;
+    }
+  }
+
+  int get howLongConvertedToDays {
+    switch (howLongUnit) {
+      case "Days":
+        return howLong;
+      case "Weeks":
+        return howLong * 7;
+      case "Months":
+        return howLong * 30;
+      default:
+        return 0;
+    }
+  }
 }
