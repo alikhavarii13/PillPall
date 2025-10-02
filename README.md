@@ -1,4 +1,3 @@
-[![GitHub Streak](https://streak-stats.demolab.com/?user=alikhavarii13)](https://git.io/streak-stats)
 ## Getting Started
 
 This project is a starting point for a Flutter application.
