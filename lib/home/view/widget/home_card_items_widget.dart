@@ -94,7 +94,7 @@ class HomeCardItemsWidget extends StatelessWidget {
                 Gap(8),
                 RichTextInfoWidget(
                   label: "Last Taken",
-                  info: item.lastTimeEat.format(context),
+                  info: item.lastTimeEat.toString(),
                 ),
               ],
             ),

@@ -1,20 +1,19 @@
-import 'package:flutter/material.dart';
+import 'dart:core';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'pills_model.freezed.dart';
 part 'pills_model.g.dart';
 
-class TimeOfDayConverter implements JsonConverter<TimeOfDay, String> {
-  const TimeOfDayConverter();
+class DateTimeConverter implements JsonConverter<DateTime, int> {
+  const DateTimeConverter();
   @override
-  TimeOfDay fromJson(String json) {
-    final parts = json.split(':');
-    return TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
+  DateTime fromJson(int json) {
+    return DateTime.fromMillisecondsSinceEpoch(json);
   }
 
   @override
-  String toJson(TimeOfDay object) {
-    return '${object.hour}:${object.minute}';
+  int toJson(DateTime object) {
+    return object.millisecondsSinceEpoch;
   }
 }
 
@@ -29,7 +28,8 @@ abstract class PillsModel with _$PillsModel {
     required String howLongUnit,
     required int howOften,
     required String howOftenUnit,
-    @TimeOfDayConverter() required TimeOfDay lastTimeEat,
+    @DateTimeConverter() required DateTime lastTimeEat,
+    @DateTimeConverter() required DateTime reminderTime,
   }) = _PillsModel;
 
   factory PillsModel.fromJson(Map<String, dynamic> json) =>

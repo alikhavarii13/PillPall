@@ -17,7 +17,7 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
   String? howOftenSelectedValue;
   List<String> howLongOptions = ["Days", "Weeks", "Months"];
   List<String> howOftenOptions = ["Days", "Hours"];
-  TimeOfDay selectedTime = TimeOfDay.now();
+  DateTime selectedTime = DateTime.now();
   final lastTimeEatController = TextEditingController();
   final pillNameController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -140,12 +140,19 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                   FocusScope.of(context).requestFocus(FocusNode());
                   final picked = await showTimePicker(
                     context: context,
-                    initialTime: selectedTime,
+                    initialTime: TimeOfDay.fromDateTime(selectedTime),
                   );
                   if (picked != null) {
                     setState(() {
-                      selectedTime = picked;
-                      lastTimeEatController.text = selectedTime.format(context);
+                      final now = DateTime.now();
+                      selectedTime = DateTime(
+                        now.year,
+                        now.month,
+                        now.day,
+                        picked.hour,
+                        picked.minute,
+                      );
+                      lastTimeEatController.text = picked.format(context);
                     });
                   }
                 },
@@ -186,6 +193,7 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                                 howOftenUnit: howOftenSelectedValue!,
                                 lastTimeEat: selectedTime,
                                 isActive: 1,
+                                reminderTime: DateTime.now(),
                               ),
                             );
                         Navigator.pop(context);
