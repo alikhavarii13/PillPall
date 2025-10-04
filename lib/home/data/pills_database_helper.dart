@@ -24,7 +24,7 @@ CREATE TABLE pills(
   howLongUnit TEXT NOT NULL,
   howOften INTEGER NOT NULL,
   howOftenUnit TEXT NOT NULL,
-  lastTimeEat TEXT NOT NULL,
+  lastTimeEat INTEGER NOT NULL,
   reminderTime INTEGER NOT NULL,
   isActive INTEGER
 )
@@ -75,10 +75,3 @@ CREATE TABLE pills(
     return await db.rawQuery("UPDATE pills SET count = (24 / howOften ) * 30");
   }
 }
-
-
-/// switch howLongUnit {
-/// case "week" value * 7
-/// case month  value * 30
-/// case day    value * 1
-/// }
