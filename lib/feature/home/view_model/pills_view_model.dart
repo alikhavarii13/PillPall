@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:health_reminder/home/data/pills_database_helper.dart';
-import 'package:health_reminder/home/data/pills_model.dart';
+import 'package:health_reminder/feature/home/data/pills_database_helper.dart';
+import 'package:health_reminder/feature/home/data/pills_model.dart';
 
 class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
   final db = PillsDatabaseHelper.instance;
