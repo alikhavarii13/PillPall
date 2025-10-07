@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:health_reminder/add_pill_screen.dart';
-import 'package:health_reminder/home/view/widget/home_card_items_widget.dart';
-import 'package:health_reminder/home/view_model/pills_view_model.dart';
+import 'package:health_reminder/feature/home/view/screen/add_pill_screen.dart';
+import 'package:health_reminder/feature/home/view/widget/home_card_items_widget.dart';
+import 'package:health_reminder/feature/home/view_model/pills_view_model.dart';
+import 'package:health_reminder/notification_helper.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -18,10 +19,15 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddPillScreen()),
+          NotificationHelper().showNotifications(
+            id: 1,
+            title: "test",
+            body: "testing",
           );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => AddPillScreen()),
+          // );
         },
       ),
       body: pills.when(
