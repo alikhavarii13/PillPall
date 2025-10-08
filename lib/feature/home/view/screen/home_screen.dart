@@ -19,11 +19,18 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          NotificationHelper().showNotifications(
+          NotificationHelper().scheduleNotification(
             id: 1,
-            title: "test",
-            body: "testing",
+            title: "title",
+            body: "body",
+            hour: DateTime.now().hour,
+            minute: DateTime.now().minute + 1,
           );
+          // NotificationHelper().showNotifications(
+          //   id: 1,
+          //   title: "test",
+          //   body: "testing",
+          // );
           // Navigator.push(
           //   context,
           //   MaterialPageRoute(builder: (context) => AddPillScreen()),

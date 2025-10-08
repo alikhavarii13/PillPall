@@ -1,34 +1,71 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-// import 'package:health_reminder/feature/home/data/pills_model.dart';
-// import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationHelper {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  final bool _isInitialized = false;
+  bool _isInitialized = false;
   bool get initialized => _isInitialized;
 
+  //TODO this part is edited by AI read it carefully
   Future<void> initializeNotification() async {
-    if (initialized) return;
-    const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
+    if (_isInitialized) return;
 
+    // 1️⃣ Initialize timezone
+    tz.initializeTimeZones();
+    final timezone = await FlutterTimezone.getLocalTimezone();
+    var currentTimeZone = timezone.localizedName!.name;
+
+    const windowsToIana = {'Iran Standard Time': 'Asia/Tehran'};
+    currentTimeZone = windowsToIana[currentTimeZone] ?? currentTimeZone;
+    tz.setLocalLocation(tz.getLocation(currentTimeZone));
+
+    // 2️⃣ Initialize plugin
+    const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
     const initSettings = InitializationSettings(
       android: androidInit,
       iOS: DarwinInitializationSettings(),
     );
 
     await flutterLocalNotificationsPlugin.initialize(initSettings);
+
+    // 3️⃣ Request general notification permission (Android 13+ / iOS)
+    final androidImpl =
+        flutterLocalNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin
+            >();
+    await androidImpl?.requestNotificationsPermission();
+
+    final iosImpl =
+        flutterLocalNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin
+            >();
+    await iosImpl?.requestPermissions(alert: true, badge: true, sound: true);
+
+    // 4️⃣ Request "Exact Alarms" permission (Android 12+)
+    final exactGranted =
+        await androidImpl?.canScheduleExactNotifications() ?? false;
+    if (!exactGranted) {
+      await androidImpl?.requestExactAlarmsPermission();
+    }
+
+    _isInitialized = true;
   }
 
   NotificationDetails notificationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
-        "daily_channel_id",
-        "Daily notification",
-        channelDescription: "daily something",
+        'daily_channel_id',
+        'Daily notification',
+        channelDescription: 'daily something',
         importance: Importance.max,
         priority: Priority.high,
       ),
+      iOS: DarwinNotificationDetails(),
     );
   }
 
@@ -37,38 +74,49 @@ class NotificationHelper {
     String? title,
     String? body,
   }) async {
-    return await flutterLocalNotificationsPlugin.show(
+    await flutterLocalNotificationsPlugin.show(
       id,
       title,
       body,
       notificationDetails(),
     );
   }
-  // Future<void> schedulePillNotification(PillsModel pill) async {
-  //   final androidDetails = const AndroidNotificationDetails(
-  //     'pill_channel_id',
-  //     'Pill Reminders',
-  //     channelDescription: 'Reminders for scheduled pills',
-  //     importance: Importance.max,
-  //     priority: Priority.high,
-  //   );
 
-  //   final details = NotificationDetails(android: androidDetails);
+  Future<void> scheduleNotification({
+    int id = 1,
+    String? title,
+    String? body,
+    required int hour,
+    required int minute,
+  }) async {
+    final now = tz.TZDateTime.now(tz.local);
 
-  //   final tzTime = tz.TZDateTime.from(pill.reminderTime, tz.local);
+    var scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    );
 
-  //   await flutterLocalNotificationsPlugin.zonedSchedule(
-  //     pill.id ?? DateTime.now().millisecondsSinceEpoch ~/ 1000,
-  //     'Time to take your pill 💊',
-  //     pill.pillName,
-  //     tzTime,
-  //     details,
-  //     androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-  //     matchDateTimeComponents: DateTimeComponents.dateAndTime,
-  //   );
-  // }
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
 
-  // Future<void> cancelNotification(int id) async {
-  //   await flutterLocalNotificationsPlugin.cancel(id);
-  // }
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      scheduledDate,
+      notificationDetails(),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+    );
+
+    print("Notification scheduled for $scheduledDate");
+  }
+
+  Future<void> cancelNotifications() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
+  }
 }
