@@ -9,7 +9,7 @@ class NotificationHelper {
   bool _isInitialized = false;
   bool get initialized => _isInitialized;
 
-  //TODO this part is edited by AI read it carefully
+  //TODO this part is edited by AI read it carfully
   Future<void> initializeNotification() async {
     if (_isInitialized) return;
 
