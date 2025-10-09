@@ -3,18 +3,16 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-//this a test to check if n8n works or not
 class NotificationHelper {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   bool _isInitialized = false;
   bool get initialized => _isInitialized;
 
-  //TODO this part is edited by AI read it carfully
+  //TODO this part is edited by AI read it carefully
   Future<void> initializeNotification() async {
     if (_isInitialized) return;
 
-    // 1️⃣ Initialize timezone
     tz.initializeTimeZones();
     final timezone = await FlutterTimezone.getLocalTimezone();
     var currentTimeZone = timezone.localizedName!.name;
@@ -23,7 +21,6 @@ class NotificationHelper {
     currentTimeZone = windowsToIana[currentTimeZone] ?? currentTimeZone;
     tz.setLocalLocation(tz.getLocation(currentTimeZone));
 
-    // 2️⃣ Initialize plugin
     const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
     const initSettings = InitializationSettings(
       android: androidInit,
@@ -32,7 +29,6 @@ class NotificationHelper {
 
     await flutterLocalNotificationsPlugin.initialize(initSettings);
 
-    // 3️⃣ Request general notification permission (Android 13+ / iOS)
     final androidImpl =
         flutterLocalNotificationsPlugin
             .resolvePlatformSpecificImplementation<
@@ -47,7 +43,6 @@ class NotificationHelper {
             >();
     await iosImpl?.requestPermissions(alert: true, badge: true, sound: true);
 
-    // 4️⃣ Request "Exact Alarms" permission (Android 12+)
     final exactGranted =
         await androidImpl?.canScheduleExactNotifications() ?? false;
     if (!exactGranted) {
