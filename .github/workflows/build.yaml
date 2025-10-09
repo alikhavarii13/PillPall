@@ -19,6 +19,10 @@ jobs:
           distribution: "oracle"
           java-version: "17"
 
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "3.7.0"
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
