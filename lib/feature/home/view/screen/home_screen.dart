@@ -19,22 +19,22 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          NotificationHelper().scheduleNotification(
-            id: 1,
-            title: "title",
-            body: "body",
-            hour: DateTime.now().hour,
-            minute: DateTime.now().minute + 1,
-          );
+          // NotificationHelper().scheduleNotification(
+          //   id: 1,
+          //   title: "title",
+          //   body: "body",
+          //   hour: DateTime.now().hour,
+          //   minute: DateTime.now().minute + 1,
+          // );
           // NotificationHelper().showNotifications(
           //   id: 1,
           //   title: "test",
           //   body: "testing",
           // );
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => AddPillScreen()),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddPillScreen()),
+          );
         },
       ),
       body: pills.when(

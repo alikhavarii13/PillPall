@@ -1,3 +1,12 @@
+# PillPall
+
+PillPall is a Flutter medication companion that helps you stay on top of your
+prescriptions. Save pill details, configure how long and how often you need to
+take them, and receive scheduled reminders thanks to local notifications and
+timezone-aware scheduling. The app stores entries locally with `sqflite` and
+uses Riverpod for state management, making it easy to review, edit, or delete
+reminders whenever your regimen changes.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

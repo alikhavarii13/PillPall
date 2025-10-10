@@ -132,6 +132,8 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                   ),
                 ],
               ),
+
+              //TODO add datepicker too
               Gap(16),
               TextFormField(
                 controller: lastTimeEatController,
