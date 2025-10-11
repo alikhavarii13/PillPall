@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:health_reminder/feature/home/data/pills_model.dart';
 import 'package:health_reminder/feature/home/view/widget/custom_drop_down_button_widget.dart';
 import 'package:health_reminder/feature/home/view_model/pills_view_model.dart';
+import 'package:health_reminder/notification_helper.dart';
 
 class AddPillScreen extends ConsumerStatefulWidget {
   const AddPillScreen({super.key, this.pillId});
@@ -198,6 +199,11 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                                 reminderTime: DateTime.now(),
                               ),
                             );
+
+                        NotificationHelper().scheduleNotification(
+                          hour: selectedTime.hour,
+                          minute: selectedTime.minute,
+                        );
                         Navigator.pop(context);
                       }
                     } catch (e) {
