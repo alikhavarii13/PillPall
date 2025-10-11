@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.health_reminder">
 
-    <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
@@ -10,7 +9,6 @@
 
     <application android:label="health_reminder" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
 
-        <!-- Your MainActivity etc -->
         <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
             <meta-data android:name="io.flutter.embedding.android.NormalTheme" android:resource="@style/NormalTheme" />
             <intent-filter>
@@ -21,18 +19,12 @@
 
         <meta-data android:name="flutterEmbedding" android:value="2" />
 
-        <!-- ✅ Correct receivers for flutter_local_notifications v19+ -->
         <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.ScheduledNotificationReceiver" android:exported="false" />
 
         <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.ActionBroadcastReceiver" android:exported="false" />
 
         <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.NotificationReceiver" android:exported="false" />
 
-        <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.RebootBroadcastReceiver" android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
     </application>
 
 
