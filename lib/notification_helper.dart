@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -12,7 +15,10 @@ class NotificationHelper {
   Future<void> initializeNotification() async {
     if (_isInitialized) return;
 
+    await requestAndroidPermissions();
+
     tz.initializeTimeZones();
+
     final timezone = await FlutterTimezone.getLocalTimezone();
     var currentTimeZone = timezone.localizedName!.name;
 
@@ -27,28 +33,29 @@ class NotificationHelper {
     );
 
     await flutterLocalNotificationsPlugin.initialize(initSettings);
-
-    final androidImpl =
-        flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin
-            >();
-    await androidImpl?.requestNotificationsPermission();
-
-    final iosImpl =
-        flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin
-            >();
-    await iosImpl?.requestPermissions(alert: true, badge: true, sound: true);
-
-    final exactGranted =
-        await androidImpl?.canScheduleExactNotifications() ?? false;
-    if (!exactGranted) {
-      await androidImpl?.requestExactAlarmsPermission();
-    }
+    var status = await Permission.camera.status;
+    if (status.isDenied) {}
 
     _isInitialized = true;
+  }
+
+  Future<void> requestAndroidPermissions() async {
+    final notificationStatus = await Permission.notification.request();
+    if (notificationStatus.isGranted) {
+      print('Notification permission granted.');
+    } else {
+      print('Notification permission denied.');
+    }
+
+    final exactAlarmStatus = await Permission.scheduleExactAlarm.status;
+    if (!exactAlarmStatus.isGranted) {
+      final newStatus = await Permission.scheduleExactAlarm.request();
+      if (newStatus.isGranted) {
+        print('Exact alarm permission granted.');
+      } else {
+        print('Exact alarm permission denied.');
+      }
+    }
   }
 
   NotificationDetails notificationDetails() {

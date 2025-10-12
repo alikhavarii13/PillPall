@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:health_reminder/feature/home/view/screen/add_pill_screen.dart';
 import 'package:health_reminder/feature/home/view/widget/home_card_items_widget.dart';
 import 'package:health_reminder/feature/home/view_model/pills_view_model.dart';
-import 'package:health_reminder/notification_helper.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

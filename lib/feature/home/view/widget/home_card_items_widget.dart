@@ -3,7 +3,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:health_reminder/feature/home/data/pills_model.dart';
 import 'package:health_reminder/feature/home/view/widget/rich_text_info_widget.dart';
-import 'package:intl/intl.dart';
 
 class HomeCardItemsWidget extends StatelessWidget {
   const HomeCardItemsWidget({
