@@ -18,18 +18,6 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          // NotificationHelper().scheduleNotification(
-          //   id: 1,
-          //   title: "title",
-          //   body: "body",
-          //   hour: DateTime.now().hour,
-          //   minute: DateTime.now().minute + 1,
-          // );
-          // NotificationHelper().showNotifications(
-          //   id: 1,
-          //   title: "test",
-          //   body: "testing",
-          // );
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddPillScreen()),
@@ -62,7 +50,7 @@ class HomeScreen extends ConsumerWidget {
         error: (err, stack) {
           return Center(
             child: Text(
-              'Something went wrong. Please try again later.',
+              err.toString(),
               style: TextStyle(color: Colors.red, fontSize: 16),
               textAlign: TextAlign.center,
             ),

@@ -66,12 +66,4 @@ CREATE TABLE pills(
       whereArgs: [model.id],
     );
   }
-
-  Future<List<Map<String, Object?>>> countPills(
-    DateTime date,
-    int howOften,
-  ) async {
-    final db = await database;
-    return await db.rawQuery("UPDATE pills SET count = (24 / howOften ) * 30");
-  }
 }

@@ -18,9 +18,6 @@ _PillsModel _$PillsModelFromJson(Map<String, dynamic> json) => _PillsModel(
   lastTimeEat: const DateTimeConverter().fromJson(
     (json['lastTimeEat'] as num).toInt(),
   ),
-  reminderTime: const DateTimeConverter().fromJson(
-    (json['reminderTime'] as num).toInt(),
-  ),
 );
 
 Map<String, dynamic> _$PillsModelToJson(_PillsModel instance) =>
@@ -34,5 +31,4 @@ Map<String, dynamic> _$PillsModelToJson(_PillsModel instance) =>
       'howOften': instance.howOften,
       'howOftenUnit': instance.howOftenUnit,
       'lastTimeEat': const DateTimeConverter().toJson(instance.lastTimeEat),
-      'reminderTime': const DateTimeConverter().toJson(instance.reminderTime),
     };

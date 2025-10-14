@@ -12,11 +12,6 @@
 
         <receiver android:name="com.dexterous.flutterlocalnotifications.NotificationReceiver" android:exported="false" />
 
-        <receiver android:name="com.dexterous.flutterlocalnotifications.RebootBroadcastReceiver" android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
 
         <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
             <intent-filter>

@@ -184,25 +184,21 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                     try {
                       if (!mounted) return;
                       if (formKey.currentState!.validate()) {
-                        ref
-                            .read(pillsProvider.notifier)
-                            .addPill(
-                              PillsModel(
-                                pillName: pillNameController.text,
-                                description: descriptionController.text,
-                                howLong: int.parse(howLongController.text),
-                                howLongUnit: howLongSelectedValue!,
-                                howOften: int.parse(howOftenController.text),
-                                howOftenUnit: howOftenSelectedValue!,
-                                lastTimeEat: selectedTime,
-                                isActive: 1,
-                                reminderTime: DateTime.now(),
-                              ),
-                            );
+                        final model = PillsModel(
+                          pillName: pillNameController.text,
+                          description: descriptionController.text,
+                          howLong: int.parse(howLongController.text),
+                          howLongUnit: howLongSelectedValue!,
+                          howOften: int.parse(howOftenController.text),
+                          howOftenUnit: howOftenSelectedValue!,
+                          lastTimeEat: selectedTime,
+                          isActive: 1,
+                        );
+                        ref.read(pillsProvider.notifier).addPill(model);
 
                         NotificationHelper().scheduleNotification(
-                          hour: selectedTime.hour,
-                          minute: selectedTime.minute,
+                          hour: model.reminder.hour,
+                          minute: model.reminder.minute,
                         );
                         Navigator.pop(context);
                       }

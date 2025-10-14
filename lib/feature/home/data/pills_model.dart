@@ -29,11 +29,19 @@ abstract class PillsModel with _$PillsModel {
     required int howOften,
     required String howOftenUnit,
     @DateTimeConverter() required DateTime lastTimeEat,
-    @DateTimeConverter() required DateTime reminderTime,
   }) = _PillsModel;
 
   factory PillsModel.fromJson(Map<String, dynamic> json) =>
       _$PillsModelFromJson(json);
+}
+
+extension ReminderTimeCalculation on PillsModel {
+  DateTime get reminder {
+    DateTime calculatedReminderTime = lastTimeEat.add(
+      Duration(hours: howOften),
+    );
+    return calculatedReminderTime;
+  }
 }
 
 extension CountCalculation on PillsModel {
