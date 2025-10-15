@@ -80,7 +80,7 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
               Row(
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: TextFormField(
                       controller: howLongController,
                       keyboardType: TextInputType.number,
@@ -92,6 +92,7 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                   ),
                   Gap(8),
                   Expanded(
+                    flex: 2,
                     child: CustomDropDownButton(
                       selectedValue: howLongSelectedValue,
                       options: howLongOptions,
