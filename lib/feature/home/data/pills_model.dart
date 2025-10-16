@@ -35,12 +35,32 @@ abstract class PillsModel with _$PillsModel {
       _$PillsModelFromJson(json);
 }
 
+//TODO read it again
 extension ReminderTimeCalculation on PillsModel {
-  DateTime get reminder {
-    DateTime calculatedReminderTime = lastTimeEat.add(
-      Duration(hours: howOften),
-    );
-    return calculatedReminderTime;
+  List<DateTime> get reminders {
+    final List<DateTime> remindersList = [];
+    final totalDays = howLongConvertedToDays;
+
+    int intervalHours;
+    if (howOftenUnit == 'Hours') {
+      intervalHours = howOften;
+    } else if (howOftenUnit == 'Days') {
+      intervalHours = howOften * 24;
+    } else {
+      intervalHours = 0;
+    }
+
+    if (intervalHours == 0) return remindersList;
+
+    final endTime = lastTimeEat.add(Duration(days: totalDays));
+
+    DateTime nextTime = lastTimeEat.add(Duration(hours: intervalHours));
+    while (nextTime.isBefore(endTime)) {
+      remindersList.add(nextTime);
+      nextTime = nextTime.add(Duration(hours: intervalHours));
+    }
+
+    return remindersList;
   }
 }
 

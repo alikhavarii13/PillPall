@@ -197,10 +197,13 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                         );
                         ref.read(pillsProvider.notifier).addPill(model);
 
-                        NotificationHelper().scheduleNotification(
-                          hour: model.reminder.hour,
-                          minute: model.reminder.minute,
-                        );
+                        for (final time in model.reminders) {
+                          NotificationHelper().scheduleNotification(
+                            hour: time.hour,
+                            minute: time.minute,
+                          );
+                        }
+
                         Navigator.pop(context);
                       }
                     } catch (e) {
