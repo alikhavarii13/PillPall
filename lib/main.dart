@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:health_reminder/app_theme.dart';
 import 'package:health_reminder/feature/home/view/screen/home_screen.dart';
 import 'package:health_reminder/notification_helper.dart';
 
@@ -15,6 +16,6 @@ class PillPallApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const HomeScreen());
+    return MaterialApp(theme: AppTheme.lightTheme(), home: const HomeScreen());
   }
 }

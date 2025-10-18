@@ -25,7 +25,6 @@ CREATE TABLE pills(
   howOften INTEGER NOT NULL,
   howOftenUnit TEXT NOT NULL,
   lastTimeEat INTEGER NOT NULL,
-  reminderTime INTEGER NOT NULL,
   isActive INTEGER
 )
 ''');

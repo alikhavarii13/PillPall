@@ -48,6 +48,7 @@ class HomeScreen extends ConsumerWidget {
           );
         },
         error: (err, stack) {
+          print(err.toString());
           return Center(
             child: Text(
               err.toString(),

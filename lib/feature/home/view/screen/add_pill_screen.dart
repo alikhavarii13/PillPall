@@ -196,9 +196,17 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                           isActive: 1,
                         );
                         ref.read(pillsProvider.notifier).addPill(model);
-
+                        // final now = DateTime.now();
+                        // NotificationHelper().scheduleNotification(
+                        //   hour: now.hour,
+                        //   minute: (now.minute + 1) % 60, // one minute later
+                        // );
                         for (final time in model.reminders) {
+                          print("Scheduling reminder for: $time");
                           NotificationHelper().scheduleNotification(
+                            id: time.hashCode,
+                            title: 'Pill Reminder',
+                            body: 'Time to take ${model.pillName}',
                             hour: time.hour,
                             minute: time.minute,
                           );
