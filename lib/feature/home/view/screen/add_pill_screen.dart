@@ -181,6 +181,91 @@ class _AddPillScreenState extends ConsumerState<AddPillScreen> {
                     ),
                   ),
 
+                  //TODO debug this
+                  // onPressed: () async {
+                  //   // CHANGE: Made async
+                  //   try {
+                  //     if (!mounted) return;
+                  //     if (formKey.currentState!.validate()) {
+                  //       final model = PillsModel(
+                  //         pillName: pillNameController.text,
+                  //         description: descriptionController.text,
+                  //         howLong: int.parse(howLongController.text),
+                  //         howLongUnit: howLongSelectedValue!,
+                  //         howOften: int.parse(howOftenController.text),
+                  //         howOftenUnit: howOftenSelectedValue!,
+                  //         lastTimeEat: selectedTime,
+                  //         isActive: 1,
+                  //       );
+
+                  //       // CHANGE: Add pill to database first
+                  //       ref.read(pillsProvider.notifier).addPill(model);
+
+                  //       // CHANGE: Ensure NotificationHelper is initialized
+                  //       if (!NotificationHelper().initialized) {
+                  //         await NotificationHelper().initializeNotification();
+                  //       }
+
+                  //       // CHANGE: Test notification - added await
+                  //       final now = DateTime.now();
+                  //       print(
+                  //         'Scheduling test notification for ${now.hour}:${(now.minute + 1) % 60}',
+                  //       );
+                  //       await NotificationHelper().scheduleNotification(
+                  //         id: 999,
+                  //         title: 'Test Notification',
+                  //         body: 'This is a test!',
+                  //         hour: now.hour,
+                  //         minute: (now.minute + 1) % 60,
+                  //       );
+
+                  //       // CHANGE: Schedule all pill reminders with await
+                  //       print(
+                  //         'Scheduling ${model.reminders.length} reminders for ${model.pillName}',
+                  //       );
+                  //       for (final time in model.reminders) {
+                  //         print(
+                  //           'Scheduling reminder for ${time.hour}:${time.minute}',
+                  //         );
+                  //         await NotificationHelper().scheduleDailyNotification(
+                  //           // CHANGE: Use daily notification
+                  //           id: time.hashCode,
+                  //           title: 'Pill Reminder: ${model.pillName}',
+                  //           body: 'Time to take ${model.pillName}',
+                  //           hour: time.hour,
+                  //           minute: time.minute,
+                  //         );
+                  //       }
+
+                  //       // CHANGE: Print pending notifications after scheduling
+                  //       await NotificationHelper().printPendingNotifications();
+
+                  //       if (mounted) {
+                  //         ScaffoldMessenger.of(context).showSnackBar(
+                  //           SnackBar(
+                  //             content: Text(
+                  //               '${model.pillName} added with ${model.reminders.length} reminder(s)',
+                  //             ),
+                  //             backgroundColor: Colors.green,
+                  //           ),
+                  //         );
+                  //         Navigator.pop(context);
+                  //       }
+                  //     }
+                  //   } catch (e) {
+                  //     print(
+                  //       'Error in onPressed: $e',
+                  //     ); // CHANGE: Added console log
+                  //     if (mounted) {
+                  //       ScaffoldMessenger.of(context).showSnackBar(
+                  //         SnackBar(
+                  //           content: Text("Error: $e"),
+                  //           backgroundColor: Colors.red,
+                  //         ),
+                  //       );
+                  //     }
+                  //   }
+                  // },
                   onPressed: () {
                     try {
                       if (!mounted) return;
