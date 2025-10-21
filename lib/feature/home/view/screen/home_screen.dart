@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:health_reminder/feature/home/view/screen/add_pill_screen.dart';
 import 'package:health_reminder/feature/home/view/widget/home_card_items_widget.dart';
 import 'package:health_reminder/feature/home/view_model/pills_view_model.dart';
@@ -26,7 +27,8 @@ class HomeScreen extends ConsumerWidget {
       ),
       body: pills.when(
         data: (pills) {
-          return ListView.builder(
+          return ListView.separated(
+            separatorBuilder: (context, index) => Gap(16),
             padding: EdgeInsets.all(16),
             itemCount: pills.length,
             itemBuilder: (context, index) {

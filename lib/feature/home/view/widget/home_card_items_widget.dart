@@ -67,10 +67,14 @@ class HomeCardItemsWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: SizedBox(
-        width: double.infinity,
-        child: Card(
+      child: Container(
+        decoration: BoxDecoration(
           color: Colors.white,
+          border: Border.all(color: Colors.black, width: 2),
+          boxShadow: [BoxShadow(color: Colors.blue, offset: Offset(6, 6))],
+        ),
+        child: SizedBox(
+          width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
