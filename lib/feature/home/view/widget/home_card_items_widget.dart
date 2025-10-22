@@ -71,7 +71,7 @@ class HomeCardItemsWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: Colors.black, width: 2),
-          boxShadow: [BoxShadow(color: Colors.blue, offset: Offset(6, 6))],
+          boxShadow: [BoxShadow(color: Colors.black, offset: Offset(6, 6))],
         ),
         child: SizedBox(
           width: double.infinity,

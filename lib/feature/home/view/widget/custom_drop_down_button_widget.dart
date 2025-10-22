@@ -15,10 +15,11 @@ class CustomDropDownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 56,
+      height: 52,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: Colors.grey.shade600),
+        color: Colors.white,
+        border: Border.all(color: Colors.black, width: 2),
+        boxShadow: [BoxShadow(color: Colors.black, offset: Offset(6, 6))],
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(

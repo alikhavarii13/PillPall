@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:health_reminder/feature/home/data/pills_model.dart';
 import 'package:health_reminder/feature/home/view/widget/custom_drop_down_button_widget.dart';
+import 'package:health_reminder/feature/home/view/widget/custom_text_field_widget.dart';
 import 'package:health_reminder/feature/home/view_model/pills_view_model.dart';
 import 'package:health_reminder/notification_helper.dart';
 
@@ -46,44 +47,31 @@ class _AddPillFormState extends ConsumerState<AddPillForm> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a name';
-                }
-                return null;
-              },
+            CustomTextfieldWidget(
+              title: 'Pill Name',
               controller: widget.pillNameController,
-              decoration: InputDecoration(
-                labelText: "Pill Name",
-                border: OutlineInputBorder(),
-              ),
             ),
             Gap(16),
-            TextFormField(
+            CustomTextfieldWidget(
+              title: 'Description',
               controller: widget.descriptionController,
-              decoration: InputDecoration(
-                labelText: "Description",
-                border: OutlineInputBorder(),
-              ),
             ),
+
             Gap(16),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+
               children: [
                 Expanded(
-                  flex: 1,
-                  child: TextFormField(
+                  flex: 2,
+                  child: CustomTextfieldWidget(
+                    title: 'for how long',
                     controller: widget.howLongController,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: "for how long",
-                      border: OutlineInputBorder(),
-                    ),
                   ),
                 ),
-                Gap(8),
+                Gap(16),
                 Expanded(
-                  flex: 2,
                   child: CustomDropDownButton(
                     selectedValue: howLongSelectedValue,
                     options: howLongOptions,
@@ -98,20 +86,17 @@ class _AddPillFormState extends ConsumerState<AddPillForm> {
             ),
             Gap(16),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
                   flex: 2,
-                  child: TextFormField(
+                  child: CustomTextfieldWidget(
+                    title: 'How often should you take your pill (e.g., every 8',
                     controller: widget.howOftenController,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText:
-                          "How often should you take your pill (e.g., every 8)",
-                      border: OutlineInputBorder(),
-                    ),
                   ),
                 ),
-                Gap(8),
+                Gap(16),
                 Expanded(
                   child: CustomDropDownButton(
                     selectedValue: howOftenSelectedValue,
@@ -128,7 +113,8 @@ class _AddPillFormState extends ConsumerState<AddPillForm> {
 
             //TODO add datepicker too
             Gap(16),
-            TextFormField(
+            CustomTextfieldWidget(
+              title: 'Last time you took your pill',
               controller: widget.lastTimeEatController,
               readOnly: true,
               onTap: () async {
@@ -151,12 +137,8 @@ class _AddPillFormState extends ConsumerState<AddPillForm> {
                   });
                 }
               },
-
-              decoration: InputDecoration(
-                labelText: "Last time you took your pill",
-                border: OutlineInputBorder(),
-              ),
             ),
+
             const Spacer(),
             Container(
               height: 48,
