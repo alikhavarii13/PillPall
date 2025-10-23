@@ -16,14 +16,23 @@ class HomeScreen extends ConsumerWidget {
         title: Text("Home", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black,
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddPillScreen()),
-          );
-        },
+      floatingActionButton: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.black, width: 2),
+          boxShadow: [BoxShadow(color: Colors.black, offset: Offset(6, 6))],
+        ),
+        child: FloatingActionButton(
+          backgroundColor: Color(0xff4A90E2),
+          shape: BeveledRectangleBorder(),
+          child: Icon(Icons.add, color: Colors.white),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddPillScreen()),
+            );
+          },
+        ),
       ),
       body: pills.when(
         data: (pills) {

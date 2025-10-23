@@ -143,13 +143,17 @@ class _AddPillFormState extends ConsumerState<AddPillForm> {
             Container(
               height: 48,
               width: double.infinity,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.black, width: 2),
+                boxShadow: [
+                  BoxShadow(color: Colors.black, offset: Offset(6, 6)),
+                ],
+              ),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  shape: ContinuousRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+                  backgroundColor: Color(0xff4A90E2),
+                  shape: BeveledRectangleBorder(),
                 ),
 
                 onPressed: () {
