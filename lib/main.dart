@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:health_reminder/core/shared/app_theme.dart';
-import 'package:health_reminder/feature/home/view/screen/home_screen.dart';
+import 'package:health_reminder/feature/home/ui/view/screen/home_screen.dart';
 import 'package:health_reminder/notification_helper.dart';
 
 void main() async {

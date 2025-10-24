@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:health_reminder/feature/home/view/widget/add_pill_form_widget.dart';
-import 'package:health_reminder/feature/home/view_model/pills_view_model.dart';
+import 'package:health_reminder/feature/home/ui/view/widget/add_pill_form_widget.dart';
+import 'package:health_reminder/feature/home/ui/view_model/pills_view_model.dart';
 
 class AddPillScreen extends ConsumerStatefulWidget {
   const AddPillScreen({super.key, this.pillId});

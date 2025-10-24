@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:health_reminder/feature/home/data/pills_model.dart';
-import 'package:health_reminder/feature/home/view/widget/custom_drop_down_button_widget.dart';
-import 'package:health_reminder/feature/home/view/widget/custom_text_field_widget.dart';
-import 'package:health_reminder/feature/home/view_model/pills_view_model.dart';
+import 'package:health_reminder/feature/home/ui/view/widget/custom_drop_down_button_widget.dart';
+import 'package:health_reminder/feature/home/ui/view/widget/custom_text_field_widget.dart';
+import 'package:health_reminder/feature/home/ui/view_model/pills_view_model.dart';
 import 'package:health_reminder/notification_helper.dart';
 
 class AddPillForm extends ConsumerStatefulWidget {
