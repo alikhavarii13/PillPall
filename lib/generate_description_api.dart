@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 
+// add header from supabase
 class GenerateDescriptionApi {
   final Dio dio = Dio();
 
