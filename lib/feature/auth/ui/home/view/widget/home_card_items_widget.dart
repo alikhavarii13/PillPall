@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
-import 'package:health_reminder/feature/data/pills_model.dart';
-import 'package:health_reminder/feature/ui/home/view/widget/rich_text_info_widget.dart';
+import 'package:health_reminder/feature/auth/data/pills_model.dart';
+import 'package:health_reminder/feature/auth/ui/home/view/widget/rich_text_info_widget.dart';
 
 class HomeCardItemsWidget extends StatelessWidget {
   const HomeCardItemsWidget({

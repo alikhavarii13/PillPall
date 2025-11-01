@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:health_reminder/feature/ui/home/view/widget/custom_text_field_widget.dart';
+import 'package:health_reminder/feature/auth/ui/home/view/widget/custom_text_field_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
