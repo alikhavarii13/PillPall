@@ -46,5 +46,5 @@ jobs:
           FILE_NAME=$(basename "$FILE_PATH")
           curl -F chat_id=$TELEGRAM_CHAT_ID \
                -F document=@$FILE_PATH \
-               -F caption="✅ New Flutter build is ready!\n\nRepository: ${{ github.repository }}\nCommit: ${{ github.sha }}" \
+               -F caption="✅ New Flutter build is ready!\nRepository: ${{ github.repository }} Commit: ${{ github.sha }}" \
                https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument
