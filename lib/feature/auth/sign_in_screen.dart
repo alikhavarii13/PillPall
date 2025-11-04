@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:health_reminder/feature/auth/ui/home/view/widget/custom_text_field_widget.dart';
+import 'package:health_reminder/core/shared/widget/custom_text_field_widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
@@ -54,15 +54,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       ),
 
                       onPressed: () async {
-                        final AuthResponse res = await Supabase
-                            .instance
-                            .client
-                            .auth
-                            .signInWithPassword(
-                              email: emailController.text,
-                              password: passwordController.text,
-                            );
-                        print('user is:${res.user}');
+                        AuthService().signInWithEmailAndPassword(
+                          emailController.text,
+                          passwordController.text,
+                        );
                       },
                       child: Text('Sign In'),
                     ),
@@ -77,4 +72,26 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   }
 }
 
-Future<void> signInWithEmail() async {}
+class AuthService {
+  Future<bool> get isAuthenticated async {
+    return _supabaseClient.auth.currentSession?.accessToken != null;
+  }
+
+  final SupabaseClient _supabaseClient = Supabase.instance.client;
+  Future<AuthResponse> signInWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    print(_supabaseClient.auth.currentUser);
+    return await _supabaseClient.auth.signInWithPassword(
+      email: email,
+      password: password,
+    );
+  }
+}
+
+final authServiceProvider = Provider<AuthService>((ref) => AuthService());
+final authStateProvider = FutureProvider<bool>((ref) async {
+  final authService = ref.watch(authServiceProvider);
+  return await authService.isAuthenticated;
+});

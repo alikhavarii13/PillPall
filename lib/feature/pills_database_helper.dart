@@ -1,4 +1,4 @@
-import 'package:health_reminder/feature/auth/data/pills_model.dart';
+import 'package:health_reminder/feature/home/data/pills_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
