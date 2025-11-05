@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:health_reminder/core/shared/widget/custom_text_field_widget.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:health_reminder/feature/auth/auth_repository_remote.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
@@ -71,27 +73,3 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     );
   }
 }
-
-class AuthService {
-  Future<bool> get isAuthenticated async {
-    return _supabaseClient.auth.currentSession?.accessToken != null;
-  }
-
-  final SupabaseClient _supabaseClient = Supabase.instance.client;
-  Future<AuthResponse> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    print(_supabaseClient.auth.currentUser);
-    return await _supabaseClient.auth.signInWithPassword(
-      email: email,
-      password: password,
-    );
-  }
-}
-
-final authServiceProvider = Provider<AuthService>((ref) => AuthService());
-final authStateProvider = FutureProvider<bool>((ref) async {
-  final authService = ref.watch(authServiceProvider);
-  return await authService.isAuthenticated;
-});

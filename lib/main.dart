@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:health_reminder/feature/auth/auth_repository_remote.dart';
 import 'package:health_reminder/feature/auth/sign_in_screen.dart';
 import 'package:health_reminder/feature/home/ui/view/screen/home_screen.dart';
 import 'package:health_reminder/notification_helper.dart';
