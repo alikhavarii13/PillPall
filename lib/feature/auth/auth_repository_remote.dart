@@ -1,21 +1,30 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:health_reminder/feature/auth/auth_repository.dart';
+import 'package:health_reminder/feature/auth/login_request_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthService {
+class AuthService implements AuthRepository {
   final SupabaseClient _supabaseClient = Supabase.instance.client;
-  Future<AuthResponse> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    print(_supabaseClient.auth.currentUser);
-    return await _supabaseClient.auth.signInWithPassword(
-      email: email,
-      password: password,
+
+  @override
+  Future<bool> get isAuthenticated async {
+    final session = _supabaseClient.auth.currentSession;
+    return session?.accessToken != null;
+  }
+
+  @override
+  Future<AuthResponse> login({required LoginRequestModel model}) {
+    return _supabaseClient.auth.signInWithPassword(
+      email: model.email,
+      password: model.password,
     );
   }
 
-  Future<bool> get isAuthenticated async {
-    return _supabaseClient.auth.currentSession?.accessToken != null;
+  @override
+  Future<void> logout() {
+    return _supabaseClient.auth.signOut();
   }
 }
 

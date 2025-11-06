@@ -55,12 +55,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         shape: BeveledRectangleBorder(),
                       ),
 
-                      onPressed: () async {
-                        AuthService().signInWithEmailAndPassword(
-                          emailController.text,
-                          passwordController.text,
-                        );
-                      },
+                      onPressed: () async {},
                       child: Text('Sign In'),
                     ),
                   ),
