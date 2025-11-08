@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiClient {
@@ -8,9 +9,12 @@ class ApiClient {
     : _dio = dio ?? Dio(BaseOptions(baseUrl: 'https://api.example.com'));
 }
 
-class SaveToken {
+class TokenNotifier extends StateNotifier<String?> {
   final String _tokenKey = "token";
-  //TODO different  between
+
+  TokenNotifier() : super(null);
+
+  // TODO different  between
   // SharedPreferences pref = await SharedPreferences.getInstance();
   // final SharedPreferences pref;
 
@@ -18,6 +22,12 @@ class SaveToken {
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     return pref.getString(_tokenKey);
+  }
+
+  Future<bool> saveString(String? token) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    return pref.setString(_tokenKey, token!);
   }
 }
 // class AuthApiClient {
