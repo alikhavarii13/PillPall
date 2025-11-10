@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,7 +44,9 @@ final tokenProvider = StateNotifierProvider<TokenNotifier, String?>(
 
 final dioProvider = Provider<Dio>((ref) {
   final token = ref.watch(tokenProvider);
-  final dio = Dio(BaseOptions(baseUrl: ''));
+  final dio = Dio(
+    BaseOptions(baseUrl: dotenv.env['BASE_URL'] ?? 'default_url'),
+  );
   dio.interceptors.add(
     InterceptorsWrapper(
       onRequest: (options, handler) {
