@@ -38,6 +38,7 @@ class TokenNotifier extends StateNotifier<String?> {
   }
 }
 
+// I was sick
 final tokenProvider = StateNotifierProvider<TokenNotifier, String?>(
   (ref) => TokenNotifier(),
 );
