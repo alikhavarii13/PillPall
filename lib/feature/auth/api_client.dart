@@ -38,20 +38,19 @@ class TokenNotifier extends StateNotifier<String?> {
   }
 }
 
-// I was sick
 final tokenProvider = StateNotifierProvider<TokenNotifier, String?>(
   (ref) => TokenNotifier(),
 );
 
 final dioProvider = Provider<Dio>((ref) {
-  final token = ref.watch(tokenProvider);
   final dio = Dio(
     BaseOptions(baseUrl: dotenv.env['BASE_URL'] ?? 'default_url'),
   );
   dio.interceptors.add(
     InterceptorsWrapper(
       onRequest: (options, handler) {
-        options.headers['Authorization'] = token;
+        options.headers['apikey'] = dotenv.env['API_KEY'];
+        options.headers['Authorization'] = ref.read(tokenProvider);
         handler.next(options);
       },
     ),
