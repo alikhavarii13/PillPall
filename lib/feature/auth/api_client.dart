@@ -53,6 +53,17 @@ final dioProvider = Provider<Dio>((ref) {
         options.headers['Authorization'] = ref.read(tokenProvider);
         handler.next(options);
       },
+      onError: (error, handler) {
+        // TODO this code is not right add supabase refreshtoken firstt
+        if (error.response!.statusCode == 401) {
+          ref.read(tokenProvider.notifier);
+          error.requestOptions.headers['Authorization'] = ref.read(
+            tokenProvider.notifier,
+          );
+          dio.fetch(error.requestOptions);
+          handler.resolve(error.response!);
+        }
+      },
     ),
   );
   return dio;
