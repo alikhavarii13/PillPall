@@ -10,35 +10,60 @@ class ApiClient {
     : _dio = dio ?? Dio(BaseOptions(baseUrl: 'https://api.example.com'));
 }
 
-class TokenNotifier extends StateNotifier<String?> {
-  final String _tokenKey = "token";
-
+class TokenNotifier extends StateNotifier<AuthTokens?> {
+  final String _accessTokenKey = "access_token";
+  final String _refreshTokenKey = "refresh_token";
   TokenNotifier() : super(null);
 
   // TODO different  between
   // SharedPreferences pref = await SharedPreferences.getInstance();
   // final SharedPreferences pref;
 
-  Future<String?> getToken() async {
+  Future<void> saveTokens(AuthTokens tokens) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    state = pref.getString(_tokenKey);
-    return state;
-  }
-
-  Future<bool> saveString(String? token) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    state = token;
-    return pref.setString(_tokenKey, state!);
+    state = tokens;
+    pref.setString(_accessTokenKey, state!.accessToken);
+    pref.setString(_refreshTokenKey, state!.refreshToken);
   }
 
   Future<void> logout() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.remove(_tokenKey);
+    pref.remove(_accessTokenKey);
+    pref.remove(_refreshTokenKey);
     state = null;
+  }
+
+  Future<AuthTokens?> getToken() async {
+    final pref = await SharedPreferences.getInstance();
+
+    final access = pref.getString(_accessTokenKey);
+    final refresh = pref.getString(_refreshTokenKey);
+
+    if (access != null && refresh != null) {
+      state = AuthTokens(accessToken: access, refreshToken: refresh);
+    } else {
+      state = null;
+    }
+
+    return state;
   }
 }
 
-final tokenProvider = StateNotifierProvider<TokenNotifier, String?>(
+class AuthTokens {
+  AuthTokens({required this.accessToken, required this.refreshToken});
+
+  final String accessToken;
+  final String refreshToken;
+
+  AuthTokens copyWith({String? newAccessToken, String? newRefreshToken}) {
+    return AuthTokens(
+      accessToken: newAccessToken ?? accessToken,
+      refreshToken: newRefreshToken ?? refreshToken,
+    );
+  }
+}
+
+final tokenProvider = StateNotifierProvider<TokenNotifier, AuthTokens?>(
   (ref) => TokenNotifier(),
 );
 
