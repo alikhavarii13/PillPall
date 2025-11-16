@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:health_reminder/feature/auth/data/model/auth_tokens.dart';
+import 'package:health_reminder/feature/auth/data/token_notifier.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
@@ -12,6 +13,10 @@ final dioProvider = Provider<Dio>((ref) {
       onRequest: (options, handler) {
         options.headers['apikey'] = dotenv.env['API_KEY'];
         final tokens = ref.read(tokenProvider);
+        if (options.uri.path == "/auth/v1/token" &&
+            options.uri.queryParameters["grant_type"] == "password") {
+          options.headers["Authorization"] = null;
+        }
 
         if (tokens != null) {
           options.headers['Authorization'] = "Bearer ${tokens.accessToken}";

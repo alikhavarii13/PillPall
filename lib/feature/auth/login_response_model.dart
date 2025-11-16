@@ -7,7 +7,8 @@ part 'login_response_model.g.dart';
 @freezed
 abstract class LoginResponseModel with _$LoginResponseModel {
   const factory LoginResponseModel({
-    required String token,
+    required String accessToken,
+    required String refreshToken,
     required String userId,
   }) = _LoginResponseModel;
 

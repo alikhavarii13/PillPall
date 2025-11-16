@@ -27,19 +27,20 @@ class PillPallApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.watch(authStateProvider);
+    //final authState = ref.watch(authStateProvider);
 
     return MaterialApp(
-      home: authState.when(
-        data: (isAuthenticated) {
-          return isAuthenticated ? const HomeScreen() : const SignInScreen();
-        },
-        loading:
-            () => const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            ),
-        error: (err, _) => Scaffold(body: Center(child: Text('Error: $err'))),
-      ),
+      home: HomeScreen(),
+      // authState.when(
+      //   data: (isAuthenticated) {
+      //     return isAuthenticated ? const HomeScreen() : const SignInScreen();
+      //   },
+      //   loading:
+      //       () => const Scaffold(
+      //         body: Center(child: CircularProgressIndicator()),
+      //       ),
+      //   error: (err, _) => Scaffold(body: Center(child: Text('Error: $err'))),
+      // ),
     );
   }
 }

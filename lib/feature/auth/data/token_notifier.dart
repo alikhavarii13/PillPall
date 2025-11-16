@@ -39,3 +39,7 @@ class TokenNotifier extends StateNotifier<AuthTokens?> {
     return state;
   }
 }
+
+final tokenProvider = StateNotifierProvider<TokenNotifier, AuthTokens?>(
+  (ref) => TokenNotifier(),
+);

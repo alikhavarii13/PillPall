@@ -1,6 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:health_reminder/feature/auth/data/token_notifier.dart';
-
 class AuthTokens {
   AuthTokens({required this.accessToken, required this.refreshToken});
 
@@ -14,7 +11,3 @@ class AuthTokens {
     );
   }
 }
-
-final tokenProvider = StateNotifierProvider<TokenNotifier, AuthTokens?>(
-  (ref) => TokenNotifier(),
-);
