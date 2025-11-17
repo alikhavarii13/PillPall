@@ -38,7 +38,7 @@ final dioProvider = Provider<Dio>((ref) {
             ),
           );
           if (refreshResponse.statusCode != 200) {
-            await ref.read(tokenProvider.notifier).logout();
+            await ref.read(tokenProvider.notifier).clearToken();
             return handler.next(error);
           }
 

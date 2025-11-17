@@ -17,7 +17,7 @@ class TokenNotifier extends StateNotifier<AuthTokens?> {
     pref.setString(_refreshTokenKey, state!.refreshToken);
   }
 
-  Future<void> logout() async {
+  Future<void> clearToken() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.remove(_accessTokenKey);
     pref.remove(_refreshTokenKey);

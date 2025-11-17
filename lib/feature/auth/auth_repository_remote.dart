@@ -7,7 +7,6 @@ import 'package:health_reminder/feature/auth/data/model/auth_tokens.dart';
 import 'package:health_reminder/feature/auth/data/token_notifier.dart';
 import 'package:health_reminder/feature/auth/login_request_model.dart';
 import 'package:health_reminder/feature/auth/login_response_model.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService implements AuthRepository {
   final Ref _ref;
@@ -34,11 +33,16 @@ class AuthService implements AuthRepository {
   }
 
   @override
-  Future<bool> get isAuthenticated => throw UnimplementedError();
+  Future<bool> get isAuthenticated async {
+    await _ref.read(tokenProvider.notifier).getToken();
+    final tokens = _ref.read(tokenProvider);
+    return tokens != null;
+  }
 
   @override
-  Future<void> logout() {
-    throw UnimplementedError();
+  Future<void> logout() async {
+    await _dio.post("/auth/v1/logout");
+    _ref.read(tokenProvider.notifier).clearToken();
   }
 }
 
