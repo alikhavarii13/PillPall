@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:health_reminder/core/shared/widget/custom_text_field_widget.dart';
 import 'package:health_reminder/feature/auth/auth_repository_remote.dart';
+import 'package:health_reminder/feature/auth/login_request_model.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
@@ -55,7 +56,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         shape: BeveledRectangleBorder(),
                       ),
 
-                      onPressed: () async {},
+                      onPressed: () async {
+                        await ref
+                            .read(authProvider)
+                            .login(
+                              model: LoginRequestModel(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              ),
+                            );
+                      },
                       child: Text('Sign In'),
                     ),
                   ),

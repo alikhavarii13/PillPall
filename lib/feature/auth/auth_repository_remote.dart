@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:health_reminder/core/dio/dio_provider.dart';
 import 'package:health_reminder/feature/auth/auth_repository.dart';
 import 'package:health_reminder/feature/auth/data/model/auth_tokens.dart';
 import 'package:health_reminder/feature/auth/data/token_notifier.dart';
@@ -29,6 +30,7 @@ class AuthService implements AuthRepository {
             refreshToken: loginResponse.refreshToken,
           ),
         );
+    print(loginResponse);
     return loginResponse;
   }
 
@@ -46,7 +48,10 @@ class AuthService implements AuthRepository {
   }
 }
 
-// final authServiceProvider = Provider<AuthService>((ref) => AuthService());
+final authProvider = Provider<AuthService>((ref) {
+  final dio = ref.watch(dioProvider);
+  return AuthService(ref, dio);
+});
 // final authStateProvider = FutureProvider<bool>((ref) async {
 //   final authService = ref.watch(authServiceProvider);
 //   return await authService.isAuthenticated;

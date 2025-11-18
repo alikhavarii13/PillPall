@@ -30,7 +30,7 @@ class PillPallApp extends ConsumerWidget {
     //final authState = ref.watch(authStateProvider);
 
     return MaterialApp(
-      home: HomeScreen(),
+      home: SignInScreen(),
       // authState.when(
       //   data: (isAuthenticated) {
       //     return isAuthenticated ? const HomeScreen() : const SignInScreen();
