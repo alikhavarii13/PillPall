@@ -9,7 +9,6 @@ abstract class LoginResponseModel with _$LoginResponseModel {
   const factory LoginResponseModel({
     required String accessToken,
     required String refreshToken,
-    required String userId,
   }) = _LoginResponseModel;
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
