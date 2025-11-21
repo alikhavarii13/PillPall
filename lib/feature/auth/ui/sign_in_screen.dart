@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:health_reminder/core/shared/widget/custom_text_field_widget.dart';
-import 'package:health_reminder/feature/auth/auth_repository_remote.dart';
 import 'package:health_reminder/feature/auth/login_request_model.dart';
+import 'package:health_reminder/feature/auth/ui/view_model/auth_view_model.dart';
+import 'package:health_reminder/feature/home/ui/view/screen/home_screen.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
@@ -17,8 +18,26 @@ class SignInScreen extends ConsumerStatefulWidget {
 class _SignInScreenState extends ConsumerState<SignInScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authViewModelProvider);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.listen(authViewModelProvider, (previous, next) {
+        if (next.hasValue) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        }
+        if (next.hasError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text("error")));
+        }
+      });
+    });
+
     return Scaffold(
       appBar: AppBar(title: Text('Sign In')),
       body: Padding(
@@ -58,15 +77,18 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
                       onPressed: () async {
                         await ref
-                            .read(authProvider)
+                            .read(authViewModelProvider.notifier)
                             .login(
-                              model: LoginRequestModel(
+                              LoginRequestModel(
                                 email: emailController.text,
                                 password: passwordController.text,
                               ),
                             );
                       },
-                      child: Text('Sign In'),
+                      child:
+                          authState.isLoading
+                              ? CircularProgressIndicator()
+                              : Text('Sign In'),
                     ),
                   ),
                 ],
