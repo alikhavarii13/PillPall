@@ -12,10 +12,11 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pills = ref.watch(pillsProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home", style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.black,
-      ),
+      //  appBar:
+      // AppBar(
+      //   title: Text("Home", style: TextStyle(color: Colors.white)),
+      //   backgroundColor: Colors.black,
+      // ),
       floatingActionButton: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -34,41 +35,62 @@ class HomeScreen extends ConsumerWidget {
           },
         ),
       ),
-      body: pills.when(
-        data: (pills) {
-          return ListView.separated(
-            separatorBuilder: (context, index) => Gap(16),
-            padding: EdgeInsets.all(16),
-            itemCount: pills.length,
-            itemBuilder: (context, index) {
-              final item = pills[index];
-              return HomeCardItemsWidget(
-                item: item,
-                deleteOnPressed: (context) {
-                  ref.read(pillsProvider.notifier).removePill(item.id!);
-                },
-                editOnPressed: (context) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => AddPillScreen(pillId: item.id!),
-                    ),
+      body: Column(
+        children: [
+          Container(
+            height: 56,
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(16, 48, 16, 16),
+            decoration: BoxDecoration(
+              color: Color(0xfffeefd7),
+              border: Border.all(color: Colors.black, width: 2),
+              boxShadow: [BoxShadow(color: Colors.black, offset: Offset(6, 6))],
+            ),
+            child: Center(
+              child: Text(
+                "Home",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              ),
+            ),
+          ),
+          pills.when(
+            data: (pills) {
+              return ListView.separated(
+                shrinkWrap: true,
+                separatorBuilder: (context, index) => Gap(16),
+                padding: EdgeInsets.all(16),
+                itemCount: pills.length,
+                itemBuilder: (context, index) {
+                  final item = pills[index];
+                  return HomeCardItemsWidget(
+                    item: item,
+                    deleteOnPressed: (context) {
+                      ref.read(pillsProvider.notifier).removePill(item.id!);
+                    },
+                    editOnPressed: (context) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AddPillScreen(pillId: item.id!),
+                        ),
+                      );
+                    },
                   );
                 },
               );
             },
-          );
-        },
-        error: (err, stack) {
-          print(err.toString());
-          return Center(
-            child: Text(
-              err.toString(),
-              style: TextStyle(color: Colors.red, fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-          );
-        },
-        loading: () => Center(child: CircularProgressIndicator()),
+            error: (err, stack) {
+              print(err.toString());
+              return Center(
+                child: Text(
+                  err.toString(),
+                  style: TextStyle(color: Colors.red, fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              );
+            },
+            loading: () => Center(child: CircularProgressIndicator()),
+          ),
+        ],
       ),
     );
   }

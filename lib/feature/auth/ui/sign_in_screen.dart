@@ -21,23 +21,21 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authViewModelProvider);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.listen(authViewModelProvider, (previous, next) {
-        if (next.hasValue) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
-        }
-        if (next.hasError) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text("error")));
-        }
-      });
+    ref.listen(authViewModelProvider, (previous, next) {
+      if (next.hasValue) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      }
+      if (next.hasError) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("error")));
+      }
     });
 
+    final authState = ref.watch(authViewModelProvider);
     return Scaffold(
       appBar: AppBar(title: Text('Sign In')),
       body: Padding(

@@ -52,7 +52,7 @@ final authProvider = Provider<AuthService>((ref) {
   final dio = ref.watch(dioProvider);
   return AuthService(ref, dio);
 });
-// final authStateProvider = FutureProvider<bool>((ref) async {
-//   final authService = ref.watch(authServiceProvider);
-//   return await authService.isAuthenticated;
-// });
+
+final authStateProvider = FutureProvider<bool>((ref) async {
+  return ref.watch(authProvider).isAuthenticated;
+});
