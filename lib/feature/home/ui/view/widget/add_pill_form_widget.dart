@@ -170,7 +170,7 @@ class _AddPillFormState extends ConsumerState<AddPillForm> {
                         lastTimeEat: selectedTime,
                         isActive: 1,
                       );
-                      ref.read(pillsProvider.notifier).addPill(model);
+                      ref.read(pillsProvider.notifier).insertPill(model);
                       // final now = DateTime.now();
                       // NotificationHelper().scheduleNotification(
                       //   hour: now.hour,

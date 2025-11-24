@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:health_reminder/feature/pills_database_helper.dart';
+import 'package:health_reminder/feature/home/data/pills_database_helper.dart';
 import 'package:health_reminder/feature/home/data/pills_model.dart';
 
 class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
@@ -13,7 +13,7 @@ class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
     return pills;
   }
 
-  Future<void> addPill(PillsModel model) async {
+  Future<void> insertPill(PillsModel model) async {
     state = AsyncLoading();
     try {
       await db.insertPill(model);
