@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:health_reminder/feature/auth/data/model/auth_tokens.dart';
+import 'package:health_reminder/feature/auth/data/services/api/model/auth_tokens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TokenNotifier extends StateNotifier<AuthTokens?> {

@@ -3,8 +3,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:health_reminder/core/dio/dio_provider.dart';
-import 'package:health_reminder/feature/auth/auth_repository.dart';
-import 'package:health_reminder/feature/auth/data/model/auth_tokens.dart';
+import 'package:health_reminder/feature/auth/data/repositories/auth_repository.dart';
+import 'package:health_reminder/feature/auth/data/services/api/model/auth_tokens.dart';
 import 'package:health_reminder/feature/auth/data/token_notifier.dart';
 import 'package:health_reminder/feature/auth/login_request_model.dart';
 import 'package:health_reminder/feature/auth/login_response_model.dart';

@@ -1,24 +1,23 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:health_reminder/feature/home/data/pills_database_helper.dart';
+import 'package:health_reminder/feature/home/data/pill_repository_impl.dart';
 import 'package:health_reminder/feature/home/data/pills_model.dart';
 
+// ViewModel should NEVER talk directly to sqflite again.
 class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
-  final db = PillsDatabaseHelper.instance;
   @override
   Future<List<PillsModel>> build() async {
     await Future.delayed(Duration(seconds: 1));
-    final jsonPills = await db.loadPills();
-    final pills = jsonPills.map((pill) => PillsModel.fromJson(pill)).toList();
+    final pills = await ref.read(pillRepoImplProvider).loadPills();
+
     return pills;
   }
 
   Future<void> insertPill(PillsModel model) async {
     state = AsyncLoading();
     try {
-      await db.insertPill(model);
-      final data = await db.loadPills();
-      final updated = data.map((item) => PillsModel.fromJson(item)).toList();
+      await ref.read(pillRepoImplProvider).insertPill(model);
+      final updated = await ref.read(pillRepoImplProvider).loadPills();
       state = AsyncData(updated);
     } catch (e, st) {
       state = AsyncError(e, st);
@@ -26,9 +25,8 @@ class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
   }
 
   Future<void> removePill(int id) async {
-    await db.removePill(id);
-    final data = await db.loadPills();
-    final updated = data.map((item) => PillsModel.fromJson(item)).toList();
+    await ref.read(pillRepoImplProvider).removePill(id);
+    final updated = await ref.read(pillRepoImplProvider).loadPills();
     state = AsyncData(updated);
   }
 
@@ -36,9 +34,9 @@ class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
     state = AsyncLoading();
 
     state = await AsyncValue.guard(() async {
-      await db.updatePill(model);
-      final data = await db.loadPills();
-      return data.map((e) => PillsModel.fromJson(e)).toList();
+      await ref.read(pillRepoImplProvider).updatePill(model);
+      final updated = await ref.read(pillRepoImplProvider).loadPills();
+      return updated;
     });
   }
 }

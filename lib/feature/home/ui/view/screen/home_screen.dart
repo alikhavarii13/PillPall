@@ -14,7 +14,14 @@ class HomeScreen extends ConsumerWidget {
     final pills = ref.watch(pillsProvider);
     return Scaffold(
       appBar: CustomAppBar(title: "Home"),
-
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xfffeefd7),
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Setting'),
+        ],
+      ),
       floatingActionButton: Container(
         decoration: BoxDecoration(
           color: Colors.white,
