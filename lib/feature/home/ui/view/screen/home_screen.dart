@@ -6,7 +6,7 @@ import 'package:health_reminder/feature/home/ui/view/screen/add_pill_screen.dart
 import 'package:health_reminder/feature/home/ui/view/widget/home_card_items_widget.dart';
 import 'package:health_reminder/feature/home/ui/view_model/pills_view_model.dart';
 
-// I was working on supabase database for pills to sync it with server
+// I was working on supabase database for pills to sync it with server still working
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
