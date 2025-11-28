@@ -6,8 +6,8 @@ import 'package:health_reminder/core/dio/dio_provider.dart';
 import 'package:health_reminder/feature/auth/data/repositories/auth_repository.dart';
 import 'package:health_reminder/feature/auth/data/services/api/model/auth_tokens.dart';
 import 'package:health_reminder/feature/auth/data/token_notifier.dart';
-import 'package:health_reminder/feature/auth/login_request_model.dart';
-import 'package:health_reminder/feature/auth/login_response_model.dart';
+import 'package:health_reminder/feature/auth/data/services/api/model/login_request_model.dart';
+import 'package:health_reminder/feature/auth/data/services/api/model/login_response_model.dart';
 
 class AuthService implements AuthRepository {
   final Ref _ref;

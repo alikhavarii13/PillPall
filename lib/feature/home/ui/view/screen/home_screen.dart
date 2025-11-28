@@ -7,6 +7,7 @@ import 'package:health_reminder/feature/home/ui/view/widget/home_card_items_widg
 import 'package:health_reminder/feature/home/ui/view_model/pills_view_model.dart';
 
 // I was working on supabase database for pills to sync it with server still working
+// Working om RLS for database
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
