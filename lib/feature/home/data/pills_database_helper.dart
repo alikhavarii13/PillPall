@@ -18,6 +18,7 @@ class PillsDatabaseHelper {
     await db.execute('''
 CREATE TABLE pills(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  uuid TEXT,
   pillName TEXT NOT NULL,
   description TEXT,
   howLong INTEGER NOT NULL,

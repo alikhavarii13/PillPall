@@ -21,6 +21,7 @@ class DateTimeConverter implements JsonConverter<DateTime, int> {
 abstract class PillsModel with _$PillsModel {
   const factory PillsModel({
     int? id,
+    String? uuid,
     required String pillName,
     String? description,
     required int isActive,

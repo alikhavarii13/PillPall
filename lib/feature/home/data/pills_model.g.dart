@@ -8,6 +8,7 @@ part of 'pills_model.dart';
 
 _PillsModel _$PillsModelFromJson(Map<String, dynamic> json) => _PillsModel(
   id: (json['id'] as num?)?.toInt(),
+  uuid: json['uuid'] as String?,
   pillName: json['pillName'] as String,
   description: json['description'] as String?,
   isActive: (json['isActive'] as num).toInt(),
@@ -23,6 +24,7 @@ _PillsModel _$PillsModelFromJson(Map<String, dynamic> json) => _PillsModel(
 Map<String, dynamic> _$PillsModelToJson(_PillsModel instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'uuid': instance.uuid,
       'pillName': instance.pillName,
       'description': instance.description,
       'isActive': instance.isActive,
