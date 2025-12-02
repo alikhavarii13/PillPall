@@ -54,7 +54,6 @@ class PillsSupabaseDataSourceImpl extends PillsSupabaseDataSource {
     await PillsDatabaseHelper.instance.updatePill(model);
   }
 
-  // TODO Add cloudId to your PillsModel
   @override
   Future<void> updatePillInCloud(PillsModel model) async {
     await dio.patch(
