@@ -1,0 +1,3 @@
+In this file I will provide the documentation about how my code works with details
+
+This app inspired its architecture from compass app which is one of the flutter samples
