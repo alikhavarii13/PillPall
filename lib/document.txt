@@ -5,3 +5,5 @@ This app inspired its architecture from compass app which is one of the flutter 
 I am using Riverpod for state management, Supabase as the backend and auth, Sqflite for offline DB, Dio for network,
 
 shared preference for saving token
+
+Based on Flutter documentation structuring your app feature base is recommended.

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:health_reminder/core/shared/widget/custom_text_field_widget.dart';
-import 'package:health_reminder/feature/auth/data/services/api/model/login_request_model.dart';
+import 'package:health_reminder/feature/auth/data/services/api/model/login_request/login_request_model.dart';
 import 'package:health_reminder/feature/auth/ui/view_model/auth_view_model.dart';
 import 'package:health_reminder/feature/home/ui/view/screen/home_screen.dart';
 
