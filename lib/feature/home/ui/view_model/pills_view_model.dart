@@ -1,10 +1,14 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:health_reminder/feature/home/data/pill_repository_impl.dart';
 import 'package:health_reminder/feature/home/data/pills_model.dart';
+import 'package:health_reminder/feature/home/data/pills_supabase_data_source_impl.dart';
 
 // ViewModel should NEVER talk directly to sqflite again.
 class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
+  final PillsSupabaseDataSourceImpl pillsToServer;
+  PillsViewModel(this.pillsToServer);
   @override
   Future<List<PillsModel>> build() async {
     await Future.delayed(Duration(seconds: 1));
@@ -18,6 +22,7 @@ class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
     try {
       await ref.read(pillRepoImplProvider).insertPill(model);
       final updated = await ref.read(pillRepoImplProvider).loadPills();
+      pillsToServer.insertPillToCloud(model);
       state = AsyncData(updated);
     } catch (e, st) {
       state = AsyncError(e, st);
@@ -42,5 +47,5 @@ class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
 }
 
 final pillsProvider = AsyncNotifierProvider<PillsViewModel, List<PillsModel>>(
-  () => PillsViewModel(),
+  () => PillsViewModel(PillsSupabaseDataSourceImpl(Dio())),
 );
