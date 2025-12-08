@@ -1,13 +1,17 @@
 import 'package:health_reminder/feature/home/data/pill_repository.dart';
 import 'package:health_reminder/feature/home/data/pills_database_helper.dart';
 import 'package:health_reminder/feature/home/data/pills_model.dart';
+import 'package:health_reminder/feature/home/data/pills_supabase_data_source_impl.dart';
 import 'package:riverpod/riverpod.dart';
 
 class PillRepositoryImpl implements PillRepository {
   final db = PillsDatabaseHelper.instance;
+  final PillsSupabaseDataSourceImpl pillsToServer;
+  PillRepositoryImpl(this.pillsToServer);
   @override
   Future<void> insertPill(PillsModel model) async {
     await db.insertPill(model);
+    await pillsToServer.insertPillToCloud(model);
   }
 
   @override
@@ -29,4 +33,7 @@ class PillRepositoryImpl implements PillRepository {
   }
 }
 
-final pillRepoImplProvider = Provider((ref) => PillRepositoryImpl());
+final pillRepoImplProvider = Provider((ref) {
+  final pillToServer = ref.watch(pillsSupabaseDataSourceImplProvider);
+  return PillRepositoryImpl(pillToServer);
+});

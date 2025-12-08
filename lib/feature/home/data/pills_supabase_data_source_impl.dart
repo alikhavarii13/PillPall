@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:health_reminder/core/dio/dio_provider.dart';
 import 'package:health_reminder/feature/home/data/pills_database_helper.dart';
 import 'package:health_reminder/feature/home/data/pills_model.dart';
 import 'package:health_reminder/feature/home/data/pills_supabase_data_source.dart';
+import 'package:riverpod/riverpod.dart';
 
 class PillsSupabaseDataSourceImpl extends PillsSupabaseDataSource {
   final Dio dio;
@@ -72,3 +74,8 @@ class PillsSupabaseDataSourceImpl extends PillsSupabaseDataSource {
     );
   }
 }
+
+final pillsSupabaseDataSourceImplProvider = Provider((ref) {
+  final dio = ref.watch(dioProvider);
+  return PillsSupabaseDataSourceImpl(dio);
+});
