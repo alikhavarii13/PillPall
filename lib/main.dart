@@ -30,6 +30,7 @@ class PillPallApp extends ConsumerWidget {
     final authState = ref.watch(authStateProvider);
 
     return MaterialApp(
+      // TODO why token is not saving??
       home: authState.when(
         data: (isAuthenticated) {
           return isAuthenticated ? const HomeScreen() : const SignInScreen();
