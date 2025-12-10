@@ -49,3 +49,7 @@
 
 3. Flutter: Building Offline-First Apps with Supabase  
    https://www.devadnani.com/blog/flutter-offline-first-supabase
+
+I am reading this article
+
+https://www.instapaper.com/read/1943531408
