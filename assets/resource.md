@@ -51,5 +51,10 @@
    https://www.devadnani.com/blog/flutter-offline-first-supabase
 
 I am reading this article
-
+I read it
 https://www.instapaper.com/read/1943531408
+
+This article was amazing and introduced me a new concept for having two type of
+data dummy and real I will implement this feature in future
+
+https://nalexn.github.io/separation-of-concerns?utm_source=chatgpt.com
