@@ -17,10 +17,12 @@ class AuthService implements AuthRepository {
 
   @override
   Future<LoginResponseModel> login({required LoginRequestModel model}) async {
+    print('before network req');
     final response = await _dio.post(
       "/auth/v1/token?grant_type=password",
       data: {"email": model.email, "password": model.password},
     );
+    print('after network req');
     final loginResponse = LoginResponseModel.fromJson(response.data);
     _ref
         .read(tokenProvider.notifier)

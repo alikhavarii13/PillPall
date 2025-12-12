@@ -24,6 +24,7 @@ class PillsSupabaseDataSourceImpl extends PillsSupabaseDataSource {
     return pills;
   }
 
+  // TODO read all code that how this works
   @override
   Future<void> insertPillToCloud(PillsModel model) async {
     // 1. Send insert request and ask Supabase to return the created row
