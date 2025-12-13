@@ -9,6 +9,8 @@ class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
 
   // final PillsSupabaseDataSourceImpl pillsToServer;
   // PillsViewModel(this.pillsToServer);
+
+  // I was tired
   @override
   Future<List<PillsModel>> build() async {
     await Future.delayed(Duration(seconds: 1));
