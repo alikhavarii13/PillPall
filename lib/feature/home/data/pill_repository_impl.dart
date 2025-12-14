@@ -16,10 +16,16 @@ class PillRepositoryImpl implements PillRepository {
 
   @override
   Future<List<PillsModel>> loadPills() async {
+    final remotePills = await pillsToServer.fetchFromCloud();
     final jsonPillsData = await db.loadPills();
-    final pills =
+    final localPills =
         jsonPillsData.map((item) => PillsModel.fromJson(item)).toList();
-    return pills;
+
+    for (var pills in remotePills) {
+      db.insertPill(pills);
+    }
+
+    return localPills;
   }
 
   @override
