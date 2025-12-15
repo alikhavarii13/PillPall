@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PillsModel {
 
- int? get id; String? get uuid; String get pillName; String? get description; int get isActive; int get howLong; String get howLongUnit; int get howOften; String get howOftenUnit;@DateTimeConverter() DateTime get lastTimeEat;
+ int? get id; String? get uuid; String get pillName; String? get description; bool get isActive; int get howLong; String get howLongUnit; int get howOften; String get howOftenUnit;@DateTimeConverter() DateTime get lastTimeEat;
 /// Create a copy of PillsModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $PillsModelCopyWith<$Res>  {
   factory $PillsModelCopyWith(PillsModel value, $Res Function(PillsModel) _then) = _$PillsModelCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? uuid, String pillName, String? description, int isActive, int howLong, String howLongUnit, int howOften, String howOftenUnit,@DateTimeConverter() DateTime lastTimeEat
+ int? id, String? uuid, String pillName, String? description, bool isActive, int howLong, String howLongUnit, int howOften, String howOftenUnit,@DateTimeConverter() DateTime lastTimeEat
 });
 
 
@@ -72,7 +72,7 @@ as int?,uuid: freezed == uuid ? _self.uuid : uuid // ignore: cast_nullable_to_no
 as String?,pillName: null == pillName ? _self.pillName : pillName // ignore: cast_nullable_to_non_nullable
 as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
-as int,howLong: null == howLong ? _self.howLong : howLong // ignore: cast_nullable_to_non_nullable
+as bool,howLong: null == howLong ? _self.howLong : howLong // ignore: cast_nullable_to_non_nullable
 as int,howLongUnit: null == howLongUnit ? _self.howLongUnit : howLongUnit // ignore: cast_nullable_to_non_nullable
 as String,howOften: null == howOften ? _self.howOften : howOften // ignore: cast_nullable_to_non_nullable
 as int,howOftenUnit: null == howOftenUnit ? _self.howOftenUnit : howOftenUnit // ignore: cast_nullable_to_non_nullable
@@ -162,7 +162,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? uuid,  String pillName,  String? description,  int isActive,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @DateTimeConverter()  DateTime lastTimeEat)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? uuid,  String pillName,  String? description,  bool isActive,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @DateTimeConverter()  DateTime lastTimeEat)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PillsModel() when $default != null:
 return $default(_that.id,_that.uuid,_that.pillName,_that.description,_that.isActive,_that.howLong,_that.howLongUnit,_that.howOften,_that.howOftenUnit,_that.lastTimeEat);case _:
@@ -183,7 +183,7 @@ return $default(_that.id,_that.uuid,_that.pillName,_that.description,_that.isAct
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? uuid,  String pillName,  String? description,  int isActive,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @DateTimeConverter()  DateTime lastTimeEat)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? uuid,  String pillName,  String? description,  bool isActive,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @DateTimeConverter()  DateTime lastTimeEat)  $default,) {final _that = this;
 switch (_that) {
 case _PillsModel():
 return $default(_that.id,_that.uuid,_that.pillName,_that.description,_that.isActive,_that.howLong,_that.howLongUnit,_that.howOften,_that.howOftenUnit,_that.lastTimeEat);case _:
@@ -203,7 +203,7 @@ return $default(_that.id,_that.uuid,_that.pillName,_that.description,_that.isAct
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? uuid,  String pillName,  String? description,  int isActive,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @DateTimeConverter()  DateTime lastTimeEat)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? uuid,  String pillName,  String? description,  bool isActive,  int howLong,  String howLongUnit,  int howOften,  String howOftenUnit, @DateTimeConverter()  DateTime lastTimeEat)?  $default,) {final _that = this;
 switch (_that) {
 case _PillsModel() when $default != null:
 return $default(_that.id,_that.uuid,_that.pillName,_that.description,_that.isActive,_that.howLong,_that.howLongUnit,_that.howOften,_that.howOftenUnit,_that.lastTimeEat);case _:
@@ -225,7 +225,7 @@ class _PillsModel implements PillsModel {
 @override final  String? uuid;
 @override final  String pillName;
 @override final  String? description;
-@override final  int isActive;
+@override final  bool isActive;
 @override final  int howLong;
 @override final  String howLongUnit;
 @override final  int howOften;
@@ -265,7 +265,7 @@ abstract mixin class _$PillsModelCopyWith<$Res> implements $PillsModelCopyWith<$
   factory _$PillsModelCopyWith(_PillsModel value, $Res Function(_PillsModel) _then) = __$PillsModelCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? uuid, String pillName, String? description, int isActive, int howLong, String howLongUnit, int howOften, String howOftenUnit,@DateTimeConverter() DateTime lastTimeEat
+ int? id, String? uuid, String pillName, String? description, bool isActive, int howLong, String howLongUnit, int howOften, String howOftenUnit,@DateTimeConverter() DateTime lastTimeEat
 });
 
 
@@ -289,7 +289,7 @@ as int?,uuid: freezed == uuid ? _self.uuid : uuid // ignore: cast_nullable_to_no
 as String?,pillName: null == pillName ? _self.pillName : pillName // ignore: cast_nullable_to_non_nullable
 as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
-as int,howLong: null == howLong ? _self.howLong : howLong // ignore: cast_nullable_to_non_nullable
+as bool,howLong: null == howLong ? _self.howLong : howLong // ignore: cast_nullable_to_non_nullable
 as int,howLongUnit: null == howLongUnit ? _self.howLongUnit : howLongUnit // ignore: cast_nullable_to_non_nullable
 as String,howOften: null == howOften ? _self.howOften : howOften // ignore: cast_nullable_to_non_nullable
 as int,howOftenUnit: null == howOftenUnit ? _self.howOftenUnit : howOftenUnit // ignore: cast_nullable_to_non_nullable

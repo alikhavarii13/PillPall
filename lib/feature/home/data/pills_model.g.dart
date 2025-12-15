@@ -7,17 +7,17 @@ part of 'pills_model.dart';
 // **************************************************************************
 
 _PillsModel _$PillsModelFromJson(Map<String, dynamic> json) => _PillsModel(
-  id: (json['id'] as num?)?.toInt(),
+  id: (json['local_id'] as num?)?.toInt(),
   uuid: json['uuid'] as String?,
-  pillName: json['pillName'] as String,
+  pillName: json['pill_name'] as String,
   description: json['description'] as String?,
-  isActive: (json['isActive'] as num).toInt(),
-  howLong: (json['howLong'] as num).toInt(),
-  howLongUnit: json['howLongUnit'] as String,
-  howOften: (json['howOften'] as num).toInt(),
-  howOftenUnit: json['howOftenUnit'] as String,
+  isActive: json['isActive'] as bool,
+  howLong: (json['how_long'] as num).toInt(),
+  howLongUnit: json['how_long_unit'] as String,
+  howOften: (json['how_often'] as num).toInt(),
+  howOftenUnit: json['how_often_unit'] as String,
   lastTimeEat: const DateTimeConverter().fromJson(
-    (json['lastTimeEat'] as num).toInt(),
+    (json['last_time_eat'] as num).toInt(),
   ),
 );
 
