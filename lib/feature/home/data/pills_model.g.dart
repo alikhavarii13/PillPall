@@ -25,12 +25,12 @@ Map<String, dynamic> _$PillsModelToJson(_PillsModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'uuid': instance.uuid,
-      'pillName': instance.pillName,
+      'pill_name': instance.pillName,
       'description': instance.description,
       'isActive': instance.isActive,
-      'howLong': instance.howLong,
-      'howLongUnit': instance.howLongUnit,
-      'howOften': instance.howOften,
-      'howOftenUnit': instance.howOftenUnit,
-      'lastTimeEat': const DateTimeConverter().toJson(instance.lastTimeEat),
+      'how_long': instance.howLong,
+      'how_long_unit': instance.howLongUnit,
+      'how_often': instance.howOften,
+      'how_often_unit': instance.howOftenUnit,
+      'last_time_eat': const DateTimeConverter().toJson(instance.lastTimeEat),
     };

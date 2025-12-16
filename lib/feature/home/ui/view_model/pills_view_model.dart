@@ -14,8 +14,6 @@ class PillsViewModel extends AsyncNotifier<List<PillsModel>> {
   Future<List<PillsModel>> build() async {
     await Future.delayed(Duration(seconds: 1));
     final pills = await ref.read(pillRepoImplProvider).loadPills();
-    // final pillss =
-    //     await ref.read(pillsSupabaseDataSourceImplProvider).fetchFromCloud();
     return pills;
   }
 
