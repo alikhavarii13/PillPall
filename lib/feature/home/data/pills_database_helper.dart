@@ -19,14 +19,14 @@ class PillsDatabaseHelper {
 CREATE TABLE pills(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   uuid TEXT,
-  pillName TEXT NOT NULL,
+  pill_name TEXT NOT NULL,
   description TEXT,
-  howLong INTEGER NOT NULL,
-  howLongUnit TEXT NOT NULL,
-  howOften INTEGER NOT NULL,
-  howOftenUnit TEXT NOT NULL,
-  lastTimeEat INTEGER NOT NULL,
-  isActive INTEGER
+  how_long INTEGER NOT NULL,
+  how_long_unit TEXT NOT NULL,
+  how_often INTEGER NOT NULL,
+  how_often_unit TEXT NOT NULL,
+  last_time_eat INTEGER NOT NULL,
+  is_active INTEGER
 )
 ''');
   }

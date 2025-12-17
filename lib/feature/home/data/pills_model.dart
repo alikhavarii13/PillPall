@@ -65,6 +65,17 @@ extension ReminderTimeCalculation on PillsModel {
   }
 }
 
+extension IntToBool on PillsModel {
+  int get active {
+    switch (isActive) {
+      case true:
+        return 1;
+      case false:
+        return 0;
+    }
+  }
+}
+
 extension CountCalculation on PillsModel {
   int get count {
     switch (howOftenUnit) {
