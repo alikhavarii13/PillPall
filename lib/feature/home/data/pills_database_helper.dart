@@ -17,7 +17,8 @@ class PillsDatabaseHelper {
   Future createDB(Database db, int version) async {
     await db.execute('''
 CREATE TABLE pills(
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  local_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id TEXT,
   uuid TEXT,
   pill_name TEXT NOT NULL,
   description TEXT,

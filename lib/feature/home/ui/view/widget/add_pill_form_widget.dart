@@ -168,7 +168,6 @@ class _AddPillFormState extends ConsumerState<AddPillForm> {
                         howOften: int.parse(widget.howOftenController.text),
                         howOftenUnit: howOftenSelectedValue!,
                         lastTimeEat: selectedTime,
-                        isActive: true,
                       );
                       ref.read(pillsProvider.notifier).insertPill(model);
                       // final now = DateTime.now();

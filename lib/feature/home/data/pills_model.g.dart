@@ -8,10 +8,9 @@ part of 'pills_model.dart';
 
 _PillsModel _$PillsModelFromJson(Map<String, dynamic> json) => _PillsModel(
   id: (json['local_id'] as num?)?.toInt(),
-  uuid: json['uuid'] as String?,
+  uuid: json['id'] as String?,
   pillName: json['pill_name'] as String,
   description: json['description'] as String?,
-  isActive: json['is_active'],
   howLong: (json['how_long'] as num).toInt(),
   howLongUnit: json['how_long_unit'] as String,
   howOften: (json['how_often'] as num).toInt(),
@@ -23,11 +22,10 @@ _PillsModel _$PillsModelFromJson(Map<String, dynamic> json) => _PillsModel(
 
 Map<String, dynamic> _$PillsModelToJson(_PillsModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'uuid': instance.uuid,
+      'local_id': instance.id,
+      'id': instance.uuid,
       'pill_name': instance.pillName,
       'description': instance.description,
-      'is_active': instance.isActive,
       'how_long': instance.howLong,
       'how_long_unit': instance.howLongUnit,
       'how_often': instance.howOften,

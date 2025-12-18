@@ -39,7 +39,6 @@ class PillsSupabaseDataSourceImpl extends PillsSupabaseDataSource {
         'how_often': model.howOften,
         'how_often_unit': model.howOftenUnit,
         'last_time_eat': model.lastTimeEat.millisecondsSinceEpoch,
-        'isActive': model.isActive,
         'updated_at': DateTime.now().toIso8601String(),
         'deleted': false,
       },

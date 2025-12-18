@@ -24,7 +24,6 @@ abstract class PillsModel with _$PillsModel {
     String? uuid,
     required String pillName,
     String? description,
-    required bool isActive,
     required int howLong,
     required String howLongUnit,
     required int howOften,
@@ -62,17 +61,6 @@ extension ReminderTimeCalculation on PillsModel {
     }
 
     return remindersList;
-  }
-}
-
-extension IntToBool on PillsModel {
-  int get active {
-    switch (isActive) {
-      case true:
-        return 1;
-      case false:
-        return 0;
-    }
   }
 }
 
