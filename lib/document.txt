@@ -7,3 +7,6 @@ I am using Riverpod for state management, Supabase as the backend and auth, Sqfl
 shared preference for saving token
 
 Based on Flutter documentation structuring your app feature base is recommended.
+
+In clean arch you should never connect a low-level class like database helper and high-level class like view-model
+directly you should use abstract classes in order to do that.

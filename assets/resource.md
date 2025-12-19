@@ -58,3 +58,9 @@ This article was amazing and introduced me a new concept for having two type of
 data dummy and real I will implement this feature in future
 
 https://nalexn.github.io/separation-of-concerns?utm_source=chatgpt.com
+
+I read these two very simple and effective explanation
+
+https://blog.esstep.com/2025/05/clean-architecture-in-flutter-beginners.html
+
+https://blog.esstep.com/2025/06/diving-deep-into-domain-layer-in.html
