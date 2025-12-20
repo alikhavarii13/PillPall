@@ -22,7 +22,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(authViewModelProvider, (previous, next) {
-      if (next.hasValue) {
+      if (next.hasValue && next.value != null) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),
