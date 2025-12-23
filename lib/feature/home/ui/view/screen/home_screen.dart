@@ -16,13 +16,24 @@ class HomeScreen extends ConsumerWidget {
     final pills = ref.watch(pillsProvider);
     return Scaffold(
       appBar: CustomAppBar(title: "Home"),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xfffeefd7),
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Setting'),
-        ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Color(0xfffeefd7),
+          border: Border(top: BorderSide(color: Colors.black, width: 2)),
+        ),
+
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Color(0xfffeefd7),
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Setting',
+            ),
+          ],
+        ),
       ),
       floatingActionButton: Container(
         decoration: BoxDecoration(
@@ -46,7 +57,7 @@ class HomeScreen extends ConsumerWidget {
         data: (pills) {
           return ListView.separated(
             separatorBuilder: (context, index) => Gap(16),
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
             itemCount: pills.length,
             itemBuilder: (context, index) {
               final item = pills[index];
